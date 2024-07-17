@@ -22,11 +22,8 @@ const CookieAlert = ({ setCookieAlertOpen }: { setCookieAlertOpen: (arg0: boolea
     <>
       <div className="container cookie-popup__container">
         <button className="btn-reset cookie-popup__close" onClick={handleCloseAlert} />
-        <p
-          className="cookie-popup__text"
-          dangerouslySetInnerHTML={{
-            __html: translations[lang].common.cookie_text,
-          }}
+        <p className="cookie-popup__text"
+           dangerouslySetInnerHTML={{ __html: translations[lang].common.cookie_text }}
         />
         <button className="btn-reset cookie-popup__accept" onClick={handleAcceptCookie}>
           {translations[lang].common.accept}

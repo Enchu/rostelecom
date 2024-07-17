@@ -22,11 +22,7 @@ const ProductSizesItem = ({
             : 'rgba(255, 255, 255, 0.10)',
         }}
     >
-      <ProductCountBySize
-        size={currentSize[0]}
-        products={currentCartItems}
-        withCartIcon={false}
-      />
+      <ProductCountBySize size={currentSize[0]} products={currentCartItems} withCartIcon={false} />
       <button className="btn-reset" onClick={handleSelectSize}>
         {currentSize[0].toLocaleUpperCase()}
       </button>

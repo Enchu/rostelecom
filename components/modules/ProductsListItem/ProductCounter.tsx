@@ -80,17 +80,9 @@ const ProductCounter = ({
 
   return (
     <div className={className}>
-      <button
-        className="btn-reset"
-        onClick={decrease}
-        disabled={disableDecrease || spinner}
-      />
+      <button className="btn-reset" onClick={decrease} disabled={disableDecrease || spinner} />
       <span>{spinner ? <FontAwesomeIcon icon={faSpinner} spin /> : count}</span>
-      <button
-        className="btn-reset"
-        onClick={increase}
-        disabled={disableIncrease || spinner}
-      />
+      <button className="btn-reset" onClick={increase} disabled={disableIncrease || spinner} />
     </div>
   )
 }

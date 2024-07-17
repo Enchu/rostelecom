@@ -6,22 +6,15 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import Header from '../modules/Header/Header'
 import MobileNavbar from '../modules/MobileNavbar/MobileNavbar'
 import SearchModal from '../modules/Header/SearchModal'
-import {
-  handleCloseAuthPopup,
-  handleCloseSearchModal,
-} from '@/lib/utils/common'
+import { handleCloseAuthPopup, handleCloseSearchModal } from '@/lib/utils/common'
 import Footer from '../modules/Footer/Footer'
 import QuickViewModal from '../modules/QuickViewModal/QuickViewModal'
 import SizeTable from '../modules/SizeTable/SizeTable'
 import AuthPopup from '../modules/AuthPopup/AuthPopup'
 import { $openAuthPopup } from '@/context/auth/state'
-import {
-  $searchModal,
-  $shareModal,
-  $showQuickViewModal,
-  $showSizeTable,
-} from '@/context/modals/state'
+import { $searchModal, $shareModal, $showQuickViewModal, $showSizeTable } from '@/context/modals/state'
 import { basePropsForMotion } from '@/constants/motion'
+import ShareModal from '@/components/modules/ShareModal/ShareModal'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 
@@ -54,7 +47,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            className='auth-popup-wrapper'
+            className="auth-popup-wrapper"
             onClick={handleCloseAuthPopupByTarget}
             ref={authWrapperRef}
           >
@@ -71,6 +64,19 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <SearchModal />
           </motion.div>
         )}
+
+        {shareModal && (
+          <motion.div {...basePropsForMotion}>
+            <ShareModal />
+          </motion.div>
+        )}
+
+        {showSizeTable && (
+          <motion.div {...basePropsForMotion}>
+            <SizeTable />
+          </motion.div>
+        )}
+
       </AnimatePresence>
 
       {!isMedia800 && (

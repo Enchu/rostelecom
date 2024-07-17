@@ -131,10 +131,7 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
               />
             )}
           </div>
-          <Link
-            href={`/catalog/${item.category}/${item._id}`}
-            className={styles.list__item__img}
-          >
+          <Link href={`/catalog/${item.category}/${item._id}`} className={styles.list__item__img}>
             <Image src={item.images[0]} alt={item.name} fill />
           </Link>
           <div className={styles.list__item__inner}>
@@ -143,39 +140,33 @@ const ProductsListItem = ({ item, title }: IProductsListItemProps) => {
                 {item.name}
               </Link>
             </h3>
-            <ProductAvailable
-              vendorCode={item.vendorCode}
-              inStock={+item.inStock}
-            />
+            <ProductAvailable vendorCode={item.vendorCode} inStock={+item.inStock} />
             <span className={styles.list__item__price}>
               {formatPrice(+item.price)} ₽
             </span>
           </div>
-          {productsWithoutSizes.includes(item.type) ? (
-            <button
-              onClick={addToCart}
-              className={`btn-reset ${styles.list__item__cart} ${
-                isProductInCart ? styles.list__item__cart_added : ''
-              }`}
-              disabled={addToCartSpinner}
-              style={addToCartSpinner ? { minWidth: 125, height: 48 } : {}}
-            >
-              {addToCartSpinner ? (
-                <FontAwesomeIcon icon={faSpinner} spin color="#fff" />
-              ) : isProductInCart ? (
-                translations[lang].product.in_cart
-              ) : (
-                translations[lang].product.to_cart
-              )}
-            </button>
-          ) : (
-            <button
-              className={`btn-reset ${styles.list__item__cart}`}
-              onClick={addToCart}
-            >
-              {translations[lang].product.to_cart}
-            </button>
-          )}
+          {productsWithoutSizes.includes(item.type)
+            ? (
+              <button
+                onClick={addToCart}
+                className={`btn-reset ${styles.list__item__cart} ${isProductInCart ? styles.list__item__cart_added : ''}`}
+                disabled={addToCartSpinner}
+                style={addToCartSpinner ? { minWidth: 125, height: 48 } : {}}
+              >
+                {addToCartSpinner
+                  ? (<FontAwesomeIcon icon={faSpinner} spin color="#fff" />)
+                  : isProductInCart
+                    ? (translations[lang].product.in_cart)
+                    : (translations[lang].product.to_cart)
+                }
+              </button>
+            )
+            : (
+              <button className={`btn-reset ${styles.list__item__cart}`} onClick={addToCart}>
+                {translations[lang].product.to_cart}
+              </button>
+            )
+          }
         </li>
       )}
     </>

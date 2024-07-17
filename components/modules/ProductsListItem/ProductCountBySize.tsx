@@ -6,9 +6,7 @@ const ProductCountBySize = ({ products, size, withCartIcon = true }: IProductCou
   return (
     <>
       {!!getCartItemCountBySize(products, size) && (
-        <span
-          className={`${styles.count} ${withCartIcon ? styles.with_icon : ''}`}
-        >
+        <span className={`${styles.count} ${withCartIcon ? styles.with_icon : ''}`}>
         <span>{getCartItemCountBySize(products, size)}</span>
       </span>
       )}

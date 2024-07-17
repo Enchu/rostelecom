@@ -232,12 +232,14 @@ const SizeTable = () => {
         <div className={styles.size_table__inner}>
           <table className={styles.size_table__table}>
             <thead>
-              {isHeaddressType ? (
+            {isHeaddressType
+              ? (
                 <tr>
                   <th>{translations[lang].size_table.head_circumference}</th>
                   <th>{translations[lang].size_table.size}</th>
                 </tr>
-              ) : (
+              )
+              : (
                 <tr>
                   <th>{translations[lang].size_table.russian_size}</th>
                   <th>{translations[lang].size_table.manufacturer_size}</th>
@@ -245,47 +247,43 @@ const SizeTable = () => {
                   <th>{translations[lang].size_table.waist_circumference}</th>
                   <th>{translations[lang].size_table.hip_circumference}</th>
                 </tr>
-              )}
+              )
+            }
             </thead>
             <tbody>
-              {isHeaddressType
-                ? headdressSizes.map((headdressSizesItem) => (
-                  <tr
-                    key={headdressSizesItem.id}
-                    {...(trProps(headdressSizesItem) as React.HTMLAttributes<HTMLTableRowElement>)}
-                  >
-                    <td>
-                      {headdressSizesItem.isInFavorites && (
-                        <span className={styles.size_table__favorite} />
-                      )}
-                      {headdressSizesItem.headCircumference}
-                    </td>
-                    <td>
-                      <ProductCountBySize size={headdressSizesItem.manufacturerSize} products={currentCartItems} />
-                      {headdressSizesItem.manufacturerSize}
-                    </td>
-                  </tr>
-                ))
-                : dressSizes.map((item) => (
-                  <tr
-                    key={item.id}
-                    {...(trProps(item) as React.HTMLAttributes<HTMLTableRowElement>)}
-                  >
-                    <td>
-                      {item.isInFavorites && (
-                        <span className={styles.size_table__favorite} />
-                      )}
-                      {item.russianSize}
-                    </td>
-                    <td>{item.manufacturerSize}</td>
-                    <td>{item.bust}</td>
-                    <td>{item.waist}</td>
-                    <td>
-                      <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
-                      {item.hipGirth}
-                    </td>
-                  </tr>
-                ))}
+            {isHeaddressType
+              ? headdressSizes.map((headdressSizesItem) => (
+                <tr
+                  key={headdressSizesItem.id}{...(trProps(headdressSizesItem) as React.HTMLAttributes<HTMLTableRowElement>)}>
+                  <td>
+                    {headdressSizesItem.isInFavorites && (
+                      <span className={styles.size_table__favorite} />
+                    )}
+                    {headdressSizesItem.headCircumference}
+                  </td>
+                  <td>
+                    <ProductCountBySize size={headdressSizesItem.manufacturerSize} products={currentCartItems} />
+                    {headdressSizesItem.manufacturerSize}
+                  </td>
+                </tr>
+              ))
+              : dressSizes.map((item) => (
+                <tr key={item.id}{...(trProps(item) as React.HTMLAttributes<HTMLTableRowElement>)}>
+                  <td>
+                    {item.isInFavorites && (
+                      <span className={styles.size_table__favorite} />
+                    )}
+                    {item.russianSize}
+                  </td>
+                  <td>{item.manufacturerSize}</td>
+                  <td>{item.bust}</td>
+                  <td>{item.waist}</td>
+                  <td>
+                    <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
+                    {item.hipGirth}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

@@ -198,15 +198,15 @@ body::-webkit-scrollbar-thumb:hover {
   transition: background-color 0.2s ease-in-out;
 }
 
-/*.counter button:first-child:before {
-  -webkit-mask: url(/img/minus.svg) no-repeat 50% 50%;
-  mask: url(/img/minus.svg) no-repeat 50% 50%;
+.counter button:first-child:before {
+  -webkit-mask: url(../../public/img/minus.svg) no-repeat 50% 50%;
+  mask: url(../../public/img/minus.svg) no-repeat 50% 50%;
 }
 
 .counter button:last-child:before {
-  -webkit-mask: url(/img/plus.svg) no-repeat 50% 50%;
-  mask: url(/img/plus.svg) no-repeat 50% 50%;
-}*/
+  -webkit-mask: url(../../public/img/plus.svg) no-repeat 50% 50%;
+  mask: url(../../public/img/plus.svg) no-repeat 50% 50%;
+}
 
 .counter button:hover::before {
   transition: background-color 0.2s ease-in-out;
@@ -240,9 +240,9 @@ body::-webkit-scrollbar-thumb:hover {
   right: 25px;
 }
 
-/*.quick-modal-dots li.slick-active button {
-  background-image: url(/img/white-ellipse.svg) !important;
-}*/
+.quick-modal-dots li.slick-active button {
+  background-image: url(../../public/img/white-ellipse.svg) !important;
+}
 
 @media (max-width: 1460px) {
   .swiper-slide-active .hero-slide-plus {
