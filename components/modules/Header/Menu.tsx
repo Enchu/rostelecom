@@ -1,30 +1,25 @@
-import React, {useState} from 'react';
-import Link from "next/link";
-import {useUnit} from "effector-react/compat";
-import {useLang} from "@/hooks/useLang";
-import {$menuIsOpen} from "@/context/modals/state";
-import {closeMenu} from "@/context/modals";
-import {setLang} from "@/context/lang/lang";
-import {removeOverflowHiddenFromBody} from "@/lib/utils/common";
-import {AllowedLangs} from "@/constants/lang";
-import Logo from "@/components/elements/Logo/Logo";
-import Accordion from "@/components/modules/Accordion/Accordion";
-import {AnimatePresence, motion} from "framer-motion";
-import {usePathname} from 'next/navigation'
-import MenuLinkItem from "@/components/modules/Header/MenuLinkItem";
-import {useMediaQuery} from "@/hooks/useMediaQuery";
-import BuyersListItems from "@/components/modules/Header/BuyersListItems";
-import ContactsListItems from "@/components/modules/Header/ContactsListItems";
+import React, { useState } from 'react'
+import { useUnit } from 'effector-react/compat'
+import { useLang } from '@/hooks/useLang'
+import { $menuIsOpen } from '@/context/modals/state'
+import { closeMenu } from '@/context/modals'
+import { setLang } from '@/context/lang/lang'
+import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
+import { AllowedLangs } from '@/constants/lang'
+import Logo from '@/components/elements/Logo/Logo'
+import Accordion from '@/components/modules/Accordion/Accordion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
+import MenuLinkItem from '@/components/modules/Header/MenuLinkItem'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import BuyersListItems from '@/components/modules/Header/BuyersListItems'
+import ContactsListItems from '@/components/modules/Header/ContactsListItems'
 
 const Menu = () => {
-  const [showCatalogList, setShowCatalogList] = useState(false)
-  const [showBuyersList, setShowBuyersList] = useState(false)
-  const [showContactsList, setShowContactsList] = useState(false)
-
+  const [activeListId, setActiveListId] = useState(0)
   const menuIsOpen = useUnit($menuIsOpen)
-  const {lang, translations} = useLang()
-  const partname = usePathname()
-
+  const { lang, translations } = useLang()
+  const pathname = usePathname()
   const isMedia800 = useMediaQuery(800)
   const isMedia640 = useMediaQuery(640)
 
@@ -36,32 +31,19 @@ const Menu = () => {
   const handleSwitchLangToRu = () => handleSwitchLang('ru')
   const handleSwitchLangToEn = () => handleSwitchLang('en')
 
-  const handleShowCatalogList = () => {
-    setShowCatalogList(true)
-    setShowBuyersList(false)
-    setShowContactsList(false)
-  }
-
-  const handleShowBuyersList = () => {
-    setShowCatalogList(false)
-    setShowBuyersList(true)
-    setShowContactsList(false)
-  }
-
-  const handleShowContactsList = () => {
-    setShowCatalogList(false)
-    setShowBuyersList(false)
-    setShowContactsList(true)
-  }
+  const handleShowCatalogList = () => setActiveListId(1)
+  const handleShowBuyersList = () => setActiveListId(2)
+  const handleShowContactsList = () => setActiveListId(3)
 
   const handleCloseMenu = () => {
     removeOverflowHiddenFromBody()
     closeMenu()
+    setActiveListId(0)
   }
 
   const handleRedirectToCatalog = (path: string) => {
-    if (partname.includes('/catalog')) {
-      window.history.pushState({path}, '', path)
+    if (pathname.includes('/catalog')) {
+      window.history.pushState({ path }, '', path)
       window.location.reload()
     }
 
@@ -139,43 +121,52 @@ const Menu = () => {
     <>
       <nav className={`nav-menu ${menuIsOpen ? 'open' : 'close'}`}>
         <div className="container nav-menu__container">
-          <div className={`nav-menu__logo ${menuIsOpen ? 'open' : ''}`}>
-            <Logo/>
+          <div className={`nav-menu__logo ${menuIsOpen ? 'open' : ''}`} onClick={handleCloseMenu}>
+            <Logo />
           </div>
-          <img className={`nav-menu__bg ${menuIsOpen ? 'open' : ''}`}
-               src={`/img/menu-bg${isMedia800 ? '-small' : ''}.png`}
-               alt="menu background"/>
-          <button className={`btn-reset nav-menu__close ${menuIsOpen ? 'open' : ''}`} onClick={handleCloseMenu}/>
+          <img
+            className={`nav-menu__bg ${menuIsOpen ? 'open' : ''}`}
+            src={`/img/menu-bg${isMedia800 ? '-small' : ''}.png`}
+            alt="menu background"
+          />
+          <button
+            className={`btn-reset nav-menu__close ${menuIsOpen ? 'open' : ''}`}
+            onClick={handleCloseMenu}
+          />
           <div className={`nav-menu__lang ${menuIsOpen ? 'open' : ''}`}>
-            <button className={`btn-reset nav-menu__lang__btn ${lang === 'ru'} ? 'lang-active': ''`}
-                    onClick={handleSwitchLangToRu}>
+            <button
+              className={`btn-reset nav-menu__lang__btn ${lang === 'ru' ? 'lang-active' : ''}`}
+              onClick={handleSwitchLangToRu}
+            >
               RU
             </button>
-            <button className={`btn-reset nav-menu__lang__btn ${lang === 'en'} ? 'lang-active': ''`}
-                    onClick={handleSwitchLangToEn}>
+            <button
+              className={`btn-reset nav-menu__lang__btn ${lang === 'en' ? 'lang-active' : ''}`}
+              onClick={handleSwitchLangToEn}
+            >
               EN
             </button>
           </div>
           <ul className={`list-reset nav-menu__list ${menuIsOpen ? 'open' : ''}`}>
-            {!isMedia800 && (<li className="nav-menu__list__item">
-              <button className={'btn-reset nav-menu__list__item__btn'} onMouseEnter={handleShowCatalogList}>
-                {translations[lang].main_menu.catalog}
-              </button>
-              <AnimatePresence>
-                {
-                  showCatalogList && (
+            {!isMedia800 && (
+              <li className="nav-menu__list__item">
+                <button className="btn-reset nav-menu__list__item__btn" onMouseEnter={handleShowCatalogList}>
+                  {translations[lang].main_menu.catalog}
+                </button>
+                <AnimatePresence>
+                  {activeListId === 1 && (
                     <motion.ul
-                      initial={{opacity: 0}}
-                      animate={{opacity: 1}}
-                      exit={{opacity: 0}}
-                      className={'list-reset nav-menu__accordion'}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="list-reset nav-menu__accordion"
                     >
-                      <li className={'nav-menu__accordion__item'}>
+                      <li className="nav-menu__accordion__item">
                         <Accordion
                           title={translations[lang].main_menu.cloth}
-                          titleClass={'btn-reset nav-menu__accordion__item__title'}
+                          titleClass="btn-reset nav-menu__accordion__item__title"
                         >
-                          <ul className={'list-reset nav-menu__accordion__item__list'}>
+                          <ul className="list-reset nav-menu__accordion__item__list">
                             {clothLinks.map((item) => (
                               <MenuLinkItem
                                 key={item.id}
@@ -186,12 +177,12 @@ const Menu = () => {
                           </ul>
                         </Accordion>
                       </li>
-                      <li className='nav-menu__accordion__item'>
+                      <li className="nav-menu__accordion__item">
                         <Accordion
                           title={translations[lang].main_menu.accessories}
-                          titleClass='btn-reset nav-menu__accordion__item__title'
+                          titleClass="btn-reset nav-menu__accordion__item__title"
                         >
-                          <ul className='list-reset nav-menu__accordion__item__list'>
+                          <ul className="list-reset nav-menu__accordion__item__list">
                             {accessoriesLinks.map((item) => (
                               <MenuLinkItem
                                 key={item.id}
@@ -202,12 +193,12 @@ const Menu = () => {
                           </ul>
                         </Accordion>
                       </li>
-                      <li className='nav-menu__accordion__item'>
+                      <li className="nav-menu__accordion__item">
                         <Accordion
                           title={translations[lang].main_menu.souvenirs}
-                          titleClass='btn-reset nav-menu__accordion__item__title'
+                          titleClass="btn-reset nav-menu__accordion__item__title"
                         >
-                          <ul className='list-reset nav-menu__accordion__item__list'>
+                          <ul className="list-reset nav-menu__accordion__item__list">
                             {souvenirsLinks.map((item) => (
                               <MenuLinkItem
                                 key={item.id}
@@ -218,12 +209,12 @@ const Menu = () => {
                           </ul>
                         </Accordion>
                       </li>
-                      <li className='nav-menu__accordion__item'>
+                      <li className="nav-menu__accordion__item">
                         <Accordion
                           title={translations[lang].main_menu.office}
-                          titleClass='btn-reset nav-menu__accordion__item__title'
+                          titleClass="btn-reset nav-menu__accordion__item__title"
                         >
-                          <ul className='list-reset nav-menu__accordion__item__list'>
+                          <ul className="list-reset nav-menu__accordion__item__list">
                             {officeLinks.map((item) => (
                               <MenuLinkItem
                                 key={item.id}
@@ -235,66 +226,71 @@ const Menu = () => {
                         </Accordion>
                       </li>
                     </motion.ul>
-                  )
-                }
-              </AnimatePresence>
-            </li>)}
+                  )}
+                </AnimatePresence>
+              </li>
+            )}
             <li className="nav-menu__list__item">
               {!isMedia640 && (
-                <button className={'btn-reset nav-menu__list__item__btn'} onMouseEnter={handleShowBuyersList}>
+                <button className="btn-reset nav-menu__list__item__btn" onMouseEnter={handleShowBuyersList}>
                   {translations[lang].main_menu.buyers}
-                </button>)}
-              {!isMedia640 && (
-                <AnimatePresence>
-                  {
-                    showBuyersList && (
-                      <motion.ul
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
-                        className={'list-reset nav-menu__accordion'}
-                      >
-                        <BuyersListItems/>
-                      </motion.ul>
-                    )
-                  }
-                </AnimatePresence>
+                </button>
               )}
               {!isMedia640 && (
-                <Accordion title={translations[lang].main_menu.buyers}
-                           titleClass={'btn-reset nav-menu__list__item__btn'}>
-                  <ul className={'nav-menu__accordion__item__list'}>
-                    <BuyersListItems/>
+                <AnimatePresence>
+                  {activeListId === 2 && (
+                    <motion.ul
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="list-reset nav-menu__accordion"
+                    >
+                      <BuyersListItems />
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              )}
+              {isMedia640 && (
+                <Accordion
+                  title={translations[lang].main_menu.buyers}
+                  titleClass="btn-reset nav-menu__list__item__btn"
+                >
+                  <ul className="list-reset nav-menu__accordion__item__list">
+                    <BuyersListItems />
                   </ul>
                 </Accordion>
               )}
             </li>
             <li className="nav-menu__list__item">
               {!isMedia640 && (
-                <button className={'btn-reset nav-menu__list__item__btn'} onMouseEnter={handleShowContactsList}>
+                <button
+                  className="btn-reset nav-menu__list__item__btn"
+                  onMouseEnter={handleShowContactsList}
+                >
                   {translations[lang].main_menu.contacts}
-                </button>)}
-              {!isMedia640 && (
-                <AnimatePresence>
-                  {
-                    showContactsList && (
-                      <motion.ul
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
-                        className={'list-reset nav-menu__accordion'}
-                      >
-                        <ContactsListItems/>
-                      </motion.ul>
-                    )
-                  }
-                </AnimatePresence>
+                </button>
               )}
               {!isMedia640 && (
-                <Accordion title={translations[lang].main_menu.contacts}
-                           titleClass={'btn-reset nav-menu__list__item__btn'}>
-                  <ul className={'nav-menu__accordion__item__list'}>
-                    <ContactsListItems/>
+                <AnimatePresence>
+                  {activeListId === 3 && (
+                    <motion.ul
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="list-reset nav-menu__accordion"
+                    >
+                      <ContactsListItems />
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              )}
+              {isMedia640 && (
+                <Accordion
+                  title={translations[lang].main_menu.contacts}
+                  titleClass="btn-reset nav-menu__list__item__btn"
+                >
+                  <ul className="list-reset nav-menu__accordion__item__list">
+                    <ContactsListItems />
                   </ul>
                 </Accordion>
               )}
@@ -303,7 +299,7 @@ const Menu = () => {
         </div>
       </nav>
     </>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu
