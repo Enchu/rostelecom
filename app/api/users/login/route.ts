@@ -1,7 +1,11 @@
 import bcrypt from 'bcryptjs'
 import { NextResponse } from 'next/server'
 import clientPromise from '@/lib/mongodb'
-import { findUserByEmail, generateTokens, getDbAndReqBody } from '@/lib/utils/api-routes'
+import {
+  findUserByEmail,
+  generateTokens,
+  getDbAndReqBody,
+} from '@/lib/utils/api-routes'
 
 export async function POST(req: Request) {
   const { db, reqBody } = await getDbAndReqBody(clientPromise, req)

@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '@/lib/mongodb'
-import { getAuthRouteData, findUserByEmail, parseJwt } from '@/lib/utils/api-routes'
+import {
+  getAuthRouteData,
+  findUserByEmail,
+  parseJwt,
+} from '@/lib/utils/api-routes'
 import { IUser } from '@/types/user'
 
 export async function GET(req: Request) {
@@ -8,7 +12,7 @@ export async function GET(req: Request) {
     const { db, validatedTokenResult, token } = await getAuthRouteData(
       clientPromise,
       req,
-      false,
+      false
     )
 
     if (validatedTokenResult.status !== 200) {
@@ -17,7 +21,7 @@ export async function GET(req: Request) {
 
     const user = (await findUserByEmail(
       db,
-      parseJwt(token as string).email,
+      parseJwt(token as string).email
     )) as unknown as IUser
 
     return NextResponse.json({

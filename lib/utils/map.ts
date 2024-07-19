@@ -1,4 +1,6 @@
-/*
+/* eslint-disable indent */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import {
   getRostelecomOfficesByCityFx,
   setChosenPickupAddressData,
@@ -22,7 +24,7 @@ export const handleSelectPickupAddress = async (text: string) => {
   return rostelecomData
 }
 
-//@jwt.ts-ignore
+//@ts-ignore
 export const handleResultsFound = (event, searchMarkersManager, map) => {
   const results = event.data.results.fuzzySearch.results
 
@@ -34,7 +36,7 @@ export const handleResultsFound = (event, searchMarkersManager, map) => {
   fitToViewport(results, map)
 }
 
-//@jwt.ts-ignore
+//@ts-ignore
 export const fitToViewport = async (markerData, map) => {
   const ttMaps = await import(`@tomtom-international/web-sdk-maps`)
 
@@ -46,18 +48,18 @@ export const fitToViewport = async (markerData, map) => {
 
   if (markerData instanceof Array) {
     markerData.forEach(function (marker) {
-      //@jwt.ts-ignore
+      //@ts-ignore
       bounds.extend(getBounds(marker))
     })
   } else {
-    //@jwt.ts-ignore
+    //@ts-ignore
     bounds.extend(getBounds(markerData))
   }
 
   map.fitBounds(bounds, { padding: 100, linear: true })
 }
 
-//@jwt.ts-ignore
+//@ts-ignore
 export const getBounds = (data) => {
   let btmRight
   let topLeft
@@ -73,13 +75,13 @@ export const getBounds = (data) => {
   return [btmRight, topLeft]
 }
 
-//@jwt.ts-ignore
+//@ts-ignore
 export const handleResultClearing = (
-  //@jwt.ts-ignore
+  //@ts-ignore
   searchMarkersManager,
-  //@jwt.ts-ignore
+  //@ts-ignore
   map,
-  //@jwt.ts-ignore
+  //@ts-ignore
   userGeolocation
 ) => {
   searchMarkersManager.clear()
@@ -101,7 +103,7 @@ export const handleResultClearing = (
   setChosenPickupAddressData({})
 }
 
-//@jwt.ts-ignore
+//@ts-ignore
 export const handleResultSelection = (event, searchMarkersManager, map) => {
   handleSelectPickupAddress(event.data.text)
   const result = event.data.result
@@ -114,39 +116,39 @@ export const handleResultSelection = (event, searchMarkersManager, map) => {
   fitToViewport(result, map)
 }
 
-//@jwt.ts-ignore
+//@ts-ignore
 export function SearchMarkersManager(map, options) {
-  //@jwt.ts-ignore
+  //@ts-ignore
   this.map = map
-  //@jwt.ts-ignore
+  //@ts-ignore
   this._options = options || {}
-  //@jwt.ts-ignore
+  //@ts-ignore
   this._poiList = undefined
-  //@jwt.ts-ignore
+  //@ts-ignore
   this.markers = {}
 }
 
-//@jwt.ts-ignore
+//@ts-ignore
 export function initSearchMarker(ttMaps) {
-  //@jwt.ts-ignore
+  //@ts-ignore
   function SearchMarker(poiData, options) {
-    //@jwt.ts-ignore
+    //@ts-ignore
     this.poiData = poiData
-    //@jwt.ts-ignore
+    //@ts-ignore
     this.options = options || {}
-    //@jwt.ts-ignore
+    //@ts-ignore
     this.marker = new ttMaps.Marker({
-      //@jwt.ts-ignore
+      //@ts-ignore
       element: this.createMarker(),
       anchor: 'bottom',
     })
-    //@jwt.ts-ignore
+    //@ts-ignore
     const lon = this.poiData.position.lng || this.poiData.position.lon
-    //@jwt.ts-ignore
+    //@ts-ignore
     this.marker.setLngLat([lon, this.poiData.position.lat])
   }
 
-  //@jwt.ts-ignore
+  //@ts-ignore
   SearchMarker.prototype.addTo = function (map) {
     this.marker.addTo(map)
     this._map = map
@@ -174,11 +176,11 @@ export function initSearchMarker(ttMaps) {
     this._map = null
   }
 
-  //@jwt.ts-ignore
+  //@ts-ignore
   SearchMarkersManager.prototype.draw = function (poiList) {
     this._poiList = poiList
     this.clear()
-    //@jwt.ts-ignore
+    //@ts-ignore
     this._poiList.forEach(function (poi) {
       const markerId = poi.id
       const poiOpts = {
@@ -189,11 +191,11 @@ export function initSearchMarker(ttMaps) {
         position: poi.position,
         entryPoints: poi.entryPoints,
       }
-      //@jwt.ts-ignore
+      //@ts-ignore
       const marker = new SearchMarker(poiOpts, this._options)
-      //@jwt.ts-ignore
+      //@ts-ignore
       marker.addTo(this.map)
-      //@jwt.ts-ignore
+      //@ts-ignore
       this.markers[markerId] = marker
     }, this)
   }
@@ -207,4 +209,3 @@ export function initSearchMarker(ttMaps) {
     this._lastClickedMarker = null
   }
 }
-*/

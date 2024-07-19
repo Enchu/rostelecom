@@ -5,11 +5,19 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { IInputs, ISignUpFx } from '@/types/authPopup'
 
-export const useAuthForm = (initialSpinner: Store<boolean>, isSideActive: boolean, event: EventCallable<ISignUpFx>) => {
+export const useAuthForm = (
+  initialSpinner: Store<boolean>,
+  isSideActive: boolean,
+  event: EventCallable<ISignUpFx>
+) => {
   const spinner = useUnit(initialSpinner)
   const { isConnected, user, connectWithPopup } = useEarthoOne()
 
-  const { register, formState: { errors }, handleSubmit } = useForm<IInputs>()
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IInputs>()
 
   useEffect(() => {
     if (isSideActive) {
@@ -24,7 +32,10 @@ export const useAuthForm = (initialSpinner: Store<boolean>, isSideActive: boolea
     }
   }, [isConnected])
 
-  const handleSignupWithOAuth = () => connectWithPopup({ accessId: `${process.env.NEXT_PUBLIC_OAUTH_ACCESS_ID}` })
+  const handleSignupWithOAuth = () =>
+    connectWithPopup({
+      accessId: `${process.env.NEXT_PUBLIC_OAUTH_ACCESS_ID}`,
+    })
 
   return {
     spinner,

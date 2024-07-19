@@ -25,7 +25,6 @@ const Header = () => {
   const isAuth = useUnit($isAuth)
   const loginCheckSpinner = useUnit(loginCheckFx.pending)
   const { lang, translations } = useLang()
-  // const user = useUnit($user)
   const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
   const currentComparisonByAuth = useGoodsByAuth($comparison, $comparisonFromLs)
 
@@ -154,7 +153,7 @@ const Header = () => {
             </Link>
           </li>
           <li className="header__links__item">
-            <Link className="header__links__item__btn header__links__item__btn--compare" href="/comparison">
+            <Link href="/comparison" className="header__links__item__btn header__links__item__btn--compare">
               {!!currentComparisonByAuth.length && (
                 <span className="not-empty" />
               )}

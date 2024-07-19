@@ -92,7 +92,10 @@ export const handleCloseAuthPopup = () => {
   closeAuthPopup()
 }
 
-export const closeAuthPopupWhenSomeModalOpened = (showQuickViewModal: boolean, showSizeTable: boolean) => {
+export const closeAuthPopupWhenSomeModalOpened = (
+  showQuickViewModal: boolean,
+  showSizeTable: boolean
+) => {
   if (showQuickViewModal || showSizeTable) {
     closeAuthPopup()
     return
@@ -134,7 +137,7 @@ export const handleShowSizeTable = (product: IProduct) => {
 
 export const getCartItemCountBySize = (
   cartItems: ICartItem[],
-  currentSize: string,
+  currentSize: string
 ) =>
   cartItems.find((item) => item.size === currentSize.toLocaleLowerCase())
     ?.count || 0
@@ -145,7 +148,7 @@ export const deleteProductFromLS = <T>(
   event: EventCallable<T>,
   setShouldShowEmpty: (arg0: boolean) => void,
   message: string,
-  withToast = true,
+  withToast = true
 ) => {
   let items = JSON.parse(localStorage.getItem(key) as string)
 
@@ -154,7 +157,7 @@ export const deleteProductFromLS = <T>(
   }
 
   const updatedItems = items.filter(
-    (item: { clientId: string }) => item.clientId !== id,
+    (item: { clientId: string }) => item.clientId !== id
   )
 
   localStorage.setItem(key, JSON.stringify(updatedItems))
@@ -195,7 +198,7 @@ export const getSearchParamsUrl = () => {
 export const updateSearchParam = (
   key: string,
   value: string | number,
-  pathname: string,
+  pathname: string
 ) => {
   const urlParams = getSearchParamsUrl()
   urlParams.set(key, `${value}`)
@@ -223,7 +226,7 @@ export const capitalizeFirstLetter = (str: string) =>
 
 export const getWatchedProductFromLS = () => {
   let watchedProducts: IProduct[] = JSON.parse(
-    localStorage.getItem('watched') as string,
+    localStorage.getItem('watched') as string
   )
 
   if (!watchedProducts || !Array.isArray(watchedProducts)) {
@@ -258,7 +261,7 @@ export const isValidAvatarImage = (image: File) => {
     toast.error(
       `Недопустимый формат ${
         imageType.split('/')[1]
-      }! Допускается только jpeg, jpg, png, gif, bmp и webp`,
+      }! Допускается только jpeg, jpg, png, gif, bmp и webp`
     )
     return false
   }

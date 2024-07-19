@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import { useUnit } from 'effector-react/compat'
-import { useLang } from '@/hooks/useLang'
-import { $menuIsOpen } from '@/context/modals/state'
-import { closeMenu } from '@/context/modals'
-import { setLang } from '@/context/lang/lang'
-import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
-import { AllowedLangs } from '@/constants/lang'
-import Logo from '@/components/elements/Logo/Logo'
-import Accordion from '@/components/modules/Accordion/Accordion'
+import { useUnit } from 'effector-react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
+import Logo from '@/components/elements/Logo/Logo'
+import { AllowedLangs } from '@/constants/lang'
+import { setLang } from '@/context/lang'
+import { closeMenu } from '@/context/modals'
+import { useLang } from '@/hooks/useLang'
+import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
+import Accordion from '../Accordion/Accordion'
 import { usePathname } from 'next/navigation'
-import MenuLinkItem from '@/components/modules/Header/MenuLinkItem'
+import MenuLinkItem from './MenuLinkItem'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import BuyersListItems from '@/components/modules/Header/BuyersListItems'
-import ContactsListItems from '@/components/modules/Header/ContactsListItems'
+import BuyersListItems from './BuyersListItems'
+import ContactsListItems from './ContactsListItems'
+import { $menuIsOpen } from '@/context/modals/state'
 
 const Menu = () => {
   const [activeListId, setActiveListId] = useState(0)
@@ -129,10 +129,7 @@ const Menu = () => {
             src={`/img/menu-bg${isMedia800 ? '-small' : ''}.png`}
             alt="menu background"
           />
-          <button
-            className={`btn-reset nav-menu__close ${menuIsOpen ? 'open' : ''}`}
-            onClick={handleCloseMenu}
-          />
+          <button className={`btn-reset nav-menu__close ${menuIsOpen ? 'open' : ''}`} onClick={handleCloseMenu} />
           <div className={`nav-menu__lang ${menuIsOpen ? 'open' : ''}`}>
             <button
               className={`btn-reset nav-menu__lang__btn ${lang === 'ru' ? 'lang-active' : ''}`}

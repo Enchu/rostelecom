@@ -4,7 +4,10 @@ import bcrypt from 'bcryptjs'
 import { shuffle } from './common'
 import { NextResponse } from 'next/server'
 
-export const getDbAndReqBody = async (clientPromise: Promise<MongoClient>, req: Request | null) => {
+export const getDbAndReqBody = async (
+  clientPromise: Promise<MongoClient>,
+  req: Request | null
+) => {
   const db = (await clientPromise).db(process.env.NEXT_PUBLIC_DB_NAME)
 
   if (req) {
@@ -23,7 +26,7 @@ export const getNewAndBestsellerGoods = async (db: Db, fieldName: string) => {
     ...clothes
       .filter(
         (item) =>
-          item[fieldName] && Object.values(item.sizes).some((value) => value),
+          item[fieldName] && Object.values(item.sizes).some((value) => value)
       )
       .slice(0, 2),
     ...accessories
@@ -41,7 +44,7 @@ export const generateTokens = (name: string, email: string) => {
     process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY as string,
     {
       expiresIn: '10m',
-    },
+    }
   )
 
   const refreshToken = jwt.sign(
@@ -49,17 +52,16 @@ export const generateTokens = (name: string, email: string) => {
       email,
     },
     process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY as string,
-    { expiresIn: '30d' },
+    { expiresIn: '30d' }
   )
 
   return { accessToken, refreshToken }
 }
 
-export const createUserAndGenerateTokens = async (db: Db, reqBody: {
-  name: string;
-  password: string;
-  email: string
-}) => {
+export const createUserAndGenerateTokens = async (
+  db: Db,
+  reqBody: { name: string; password: string; email: string }
+) => {
   const salt = bcrypt.genSaltSync(10)
   const hash = bcrypt.hashSync(reqBody.password, salt)
 
@@ -80,11 +82,11 @@ export const findUserByEmail = async (db: Db, email: string) =>
 export const getAuthRouteData = async (
   clientPromise: Promise<MongoClient>,
   req: Request,
-  withReqBody = true,
+  withReqBody = true
 ) => {
   const { db, reqBody } = await getDbAndReqBody(
     clientPromise,
-    withReqBody ? req : null,
+    withReqBody ? req : null
   )
   const token = req.headers.get('authorization')?.split(' ')[1]
   const validatedTokenResult = await isValidAccessToken(token)
@@ -113,7 +115,7 @@ export const isValidAccessToken = async (token: string | undefined) => {
       if (err) {
         jwtError = err
       }
-    },
+    }
   )
 
   if (jwtError) {
@@ -132,12 +134,12 @@ export const parseJwt = (token: string) =>
 export const getDataFromDBByCollection = async (
   clientPromise: Promise<MongoClient>,
   req: Request,
-  collection: string,
+  collection: string
 ) => {
   const { db, validatedTokenResult, token } = await getAuthRouteData(
     clientPromise,
     req,
-    false,
+    false
   )
 
   if (validatedTokenResult.status !== 200) {
@@ -156,11 +158,11 @@ export const getDataFromDBByCollection = async (
 export const replaceProductsInCollection = async (
   clientPromise: Promise<MongoClient>,
   req: Request,
-  collection: string,
+  collection: string
 ) => {
   const { db, validatedTokenResult, reqBody, token } = await getAuthRouteData(
     clientPromise,
-    req,
+    req
   )
 
   if (validatedTokenResult.status !== 200) {
@@ -205,12 +207,12 @@ export const deleteProduct = async (
   clientPromise: Promise<MongoClient>,
   req: Request,
   id: string,
-  collection: string,
+  collection: string
 ) => {
   const { db, validatedTokenResult } = await getAuthRouteData(
     clientPromise,
     req,
-    false,
+    false
   )
 
   if (validatedTokenResult.status !== 200) {
