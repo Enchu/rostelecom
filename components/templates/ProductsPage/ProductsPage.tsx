@@ -15,7 +15,7 @@ import WatchedProducts from '@/components/modules/WatchedProducts/WatchedProduct
 import styles from '@/styles/catalog/index.module.scss'
 import skeletonStyles from '@/styles/skeleton/index.module.scss'
 
-const ProductPage = ({ searchParams, pageName }: IProductsPage) => {
+const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
   const { lang, translations } = useLang()
   const {
     products,
@@ -159,7 +159,11 @@ const ProductPage = ({ searchParams, pageName }: IProductsPage) => {
         handleApplyFiltersBySort={handleApplyFiltersBySort}
       />
       {productsSpinner && (
-        <motion.ul{...basePropsForMotion} className={skeletonStyles.skeleton} style={{ marginBottom: 60 }}>
+        <motion.ul
+          {...basePropsForMotion}
+          className={skeletonStyles.skeleton}
+          style={{ marginBottom: 60 }}
+        >
           {Array.from(new Array(12)).map((_, i) => (
             <li key={i} className={skeletonStyles.skeleton__item}>
               <div className={skeletonStyles.skeleton__item__light} />
@@ -183,7 +187,9 @@ const ProductPage = ({ searchParams, pageName }: IProductsPage) => {
         <ReactPaginate
           {...paginationProps}
           nextLabel={<span>{translations[lang].catalog.next_page}</span>}
-          previousLabel={<span>{translations[lang].catalog.previous_page}</span>}
+          previousLabel={
+            <span>{translations[lang].catalog.previous_page}</span>
+          }
           onPageChange={handlePageChange}
         />
       </div>
@@ -192,4 +198,4 @@ const ProductPage = ({ searchParams, pageName }: IProductsPage) => {
   )
 }
 
-export default ProductPage
+export default ProductsPage

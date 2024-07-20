@@ -3,10 +3,9 @@ const { faker } = require('@faker-js/faker')
 const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
 const collections = ['street', 'black', 'casual', 'orange', 'line']
-const colors = ['purple', 'yellow', 'orange', 'black', 'white']
+const colors = ['purpure', 'yellow', 'orange', 'black', 'white']
 const compositions = ['cotton', 'synthetics', 'polyester']
 const clothTypes = ['t-shirts', 'long-sleeves', 'hoodie', 'outerwear']
-
 const images = [
   '/img/clothes/cloth-hoodie-1.png',
   '/img/clothes/cloth-long-sleeves-1.png',
@@ -16,13 +15,11 @@ const images = [
   '/img/clothes/cloth-t-shirts-1.png',
   '/img/clothes/cloth-t-shirts-2.png',
 ]
-
 const lineImages = [
   '/img/black-t.png',
   '/img/violet-t.png',
   '/img/orange-t.png',
 ]
-
 const fabricTypes = [
   'natural',
   'non-natural',
@@ -30,14 +27,12 @@ const fabricTypes = [
   'non-woven',
   'stockinette',
 ]
-
 const features = [
   'breathable material, knitwear',
   'contrasting color',
   'soft fabric',
   'hood, pockets',
 ]
-
 const collars = [
   'polo',
   'shirt-rack',
@@ -46,7 +41,6 @@ const collars = [
   'golf',
   'round neck',
 ]
-
 const sleeves = ['long', 'short']
 const seasons = ['demi-season', 'all season']
 const upperMaterials = [
@@ -55,7 +49,6 @@ const upperMaterials = [
   'eco leather',
   'denim',
 ]
-
 const liningMaterials = ['taffeta', 'viscose', 'polyester', 'chiffon', 'satin']
 
 module.exports = {

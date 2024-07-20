@@ -1,4 +1,4 @@
-import ProductPage from '@/components/templates/ProductsPage/ProductsPage'
+import ProductsPage from '@/components/templates/ProductsPage/ProductsPage'
 import { productCategories } from '@/constants/product'
 import { notFound } from 'next/navigation'
 
@@ -7,5 +7,5 @@ export default function Category({ params }: { params: { category: string } }) {
     notFound()
   }
 
-  return <ProductPage searchParams={params || {}} pageName={params.category} />
+  return <ProductsPage searchParams={params || {}} pageName={params.category} />
 }
