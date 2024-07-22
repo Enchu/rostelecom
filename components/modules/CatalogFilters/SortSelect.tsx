@@ -8,7 +8,11 @@ import SelectItem from './SelectItem'
 import { getSearchParamsUrl } from '@/lib/utils/common'
 import styles from '@/styles/catalog/index.module.scss'
 
-const SortSelect = ({ handleApplyFiltersBySort }: { handleApplyFiltersBySort: (arg0: string) => void }) => {
+const SortSelect = ({
+  handleApplyFiltersBySort,
+}: {
+  handleApplyFiltersBySort: (arg0: string) => void
+}) => {
   const { lang, translations } = useLang()
   const { open, ref, toggle } = useClickOutside()
   const [option, setOption] = useState('')
@@ -53,7 +57,10 @@ const SortSelect = ({ handleApplyFiltersBySort }: { handleApplyFiltersBySort: (a
   ]
 
   return (
-    <div className={`${styles.catalog__filters__select} ${styles.catalog__filters__select_size}`} ref={ref}>
+    <div
+      className={`${styles.catalog__filters__select} ${styles.catalog__filters__select_size}`}
+      ref={ref}
+    >
       <SelectBtn
         open={open}
         toggle={toggle}
@@ -63,7 +70,10 @@ const SortSelect = ({ handleApplyFiltersBySort }: { handleApplyFiltersBySort: (a
       />
       <AnimatePresence>
         {open && (
-          <motion.ul className={`list-reset ${styles.catalog__filters__list}`}{...basePropsForMotion}>
+          <motion.ul
+            className={`list-reset ${styles.catalog__filters__list}`}
+            {...basePropsForMotion}
+          >
             {sortOptions.map((item) => (
               <SelectItem
                 key={item.id}

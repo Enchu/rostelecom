@@ -7,25 +7,23 @@ const EmailInput = ({ register, errors }: IAuthInput) => {
   const { lang, translations } = useLang()
 
   return (
-    <>
-      <div className='form__block'>
-        <input
-          type='email'
-          className='form__block__input'
-          placeholder='Email'
-          {...register(
-            'email',
-            emailValidationRules(
-              translations[lang].validation.invalid_email,
-              translations[lang].validation.required_email
-            )
-          )}
-        />
-        {errors.email && (
-          <span className={styles.error_alert}>{errors.email?.message}</span>
+    <div className='form__block'>
+      <input
+        type='email'
+        className='form__block__input'
+        placeholder='Email'
+        {...register(
+          'email',
+          emailValidationRules(
+            translations[lang].validation.invalid_email,
+            translations[lang].validation.required_email
+          )
         )}
-      </div>
-    </>
+      />
+      {errors.email && (
+        <span className={styles.error_alert}>{errors.email?.message}</span>
+      )}
+    </div>
   )
 }
 

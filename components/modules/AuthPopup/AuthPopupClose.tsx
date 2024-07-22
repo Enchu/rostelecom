@@ -9,9 +9,7 @@ const AuthPopupClose = () => {
   const closePopup = () =>
     closeAuthPopupWhenSomeModalOpened(showQuickViewModal, showSizeTable)
 
-  return (
-    <button className="btn-reset auth-popup__close" onClick={closePopup} />
-  )
+  return <button className='btn-reset auth-popup__close' onClick={closePopup} />
 }
 
 export default AuthPopupClose

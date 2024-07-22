@@ -1,26 +1,25 @@
 'use client'
 import Image from 'next/image'
-import {useLang} from "@/hooks/useLang";
+import Link from 'next/link'
+import AllLink from '@/components/elements/AllLink/AllLink'
+import useImagePreloader from '@/hooks/useImagePreloader'
+import { useLang } from '@/hooks/useLang'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import img1 from '@/public/img/categories-img-1.png'
 import img2 from '@/public/img/categories-img-2.png'
 import img3 from '@/public/img/categories-img-3.png'
 import img4 from '@/public/img/categories-img-4.png'
-import {useMediaQuery} from "@/hooks/useMediaQuery";
-import useImagePreloader from "@/hooks/useImagePreloader";
 import styles from '@/styles/main-page/index.module.scss'
-import Link from "next/link";
-import AllLink from "@/components/elements/AllLink/AllLink";
-import MainSlider from '@/components/modules/MainPage/MainSlider'
+import MainSlider from '../MainSlider'
 
 const Categories = () => {
-  const {lang, translations} = useLang()
-
+  const { lang, translations } = useLang()
   const isMedia490 = useMediaQuery(490)
-  const {handleLoadingImageComplete, imgSpinner} = useImagePreloader()
+  const { handleLoadingImageComplete, imgSpinner } = useImagePreloader()
   const imgSpinnerClass = imgSpinner ? styles.img_loading : ''
 
   const images = [
-    {src: img1, id: 1, title: translations[lang].main_page.category_cloth},
+    { src: img1, id: 1, title: translations[lang].main_page.category_cloth },
     {
       src: img2,
       id: 2,
@@ -31,7 +30,7 @@ const Categories = () => {
       id: 3,
       title: translations[lang].main_page.category_souvenirs,
     },
-    {src: img4, id: 4, title: translations[lang].main_page.category_office},
+    { src: img4, id: 4, title: translations[lang].main_page.category_office },
   ]
 
   return (
@@ -41,7 +40,7 @@ const Categories = () => {
           {translations[lang].main_page.category_title}
         </h2>
         <div className={styles.categories__inner}>
-          <AllLink/>
+          <AllLink />
           {!isMedia490 && (
             <>
               <Link
@@ -102,11 +101,11 @@ const Categories = () => {
               </div>
             </>
           )}
-          {isMedia490 && <MainSlider images={images}/>}
+          {isMedia490 && <MainSlider images={images} />}
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Categories;
+export default Categories

@@ -21,17 +21,22 @@ const ProductPage = ({ productId, category }: IProductPageProps) => {
   const { lang, translations } = useLang()
 
   useEffect(() => {
-    loadOneProduct({ productId, category })
+    loadOneProduct({
+      productId,
+      category,
+    })
   }, [])
 
   useEffect(() => {
     if (breadcrumbs) {
-      const lastCrumb = breadcrumbs.children[breadcrumbs.children.length - 1].children[0]
+      const lastCrumb =
+        breadcrumbs.children[breadcrumbs.children.length - 1].children[0]
 
       breadcrumbs.children[
-      breadcrumbs.children.length - 2].children[0].textContent = (translations[lang].breadcrumbs as {
-        [index: string]: string
-      })[category]
+        breadcrumbs.children.length - 2
+      ].children[0].textContent = (
+        translations[lang].breadcrumbs as { [index: string]: string }
+      )[category]
 
       lastCrumb.textContent = productSpinner
         ? translations[lang].common.loading
@@ -45,14 +50,13 @@ const ProductPage = ({ productId, category }: IProductPageProps) => {
 
   return (
     <div className={styles.product}>
-      {productSpinner
-        ? (
-          <div className={styles.product__preloader}>
-            <FontAwesomeIcon icon={faSpinner} spin size="8x" />
-          </div>
-        )
-        : (product.name && <ProductPageContent />)
-      }
+      {productSpinner ? (
+        <div className={styles.product__preloader}>
+          <FontAwesomeIcon icon={faSpinner} spin size='8x' />
+        </div>
+      ) : (
+        product.name && <ProductPageContent />
+      )}
     </div>
   )
 }

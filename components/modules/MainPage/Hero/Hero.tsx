@@ -1,18 +1,18 @@
 'use client'
-import HeroSlide from '@/components/modules/MainPage/Hero/HeroSlide'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCoverflow } from 'swiper/modules'
 import { Swiper as SwiperType } from 'swiper/types'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
-import styles from '@/styles/main-page/index.module.scss'
-import stylesForAd from '@/styles/ad/index.module.scss'
-import productSubtitleStyles from '@/styles/productSubtitle/index.module.scss'
 import { useLang } from '@/hooks/useLang'
 import img1 from '@/public/img/black-t.png'
 import img2 from '@/public/img/orange-t.png'
 import img3 from '@/public/img/violet-t.png'
+import HeroSlide from './HeroSlide'
 import ProductSubtitle from '@/components/elements/ProductSubtitle/ProductSubtitle'
+import styles from '@/styles/main-page/index.module.scss'
+import stylesForAd from '@/styles/ad/index.module.scss'
+import productSubtitleStyles from '@/styles/productSubtitle/index.module.scss'
 
 const Hero = () => {
   const { lang, translations } = useLang()
@@ -39,21 +39,21 @@ const Hero = () => {
 
   return (
     <section className={styles.hero}>
-      <h1 className="visually-hidden">
+      <h1 className='visually-hidden'>
         {translations[lang].main_page.hero_hidden_title}
       </h1>
       <div className={`container ${styles.hero__container}`}>
         <span className={stylesForAd.ad}>{translations[lang].common.ad}</span>
         <Swiper
           className={styles.hero__slider}
-          effect="coverflow"
+          effect='coverflow'
           coverflowEffect={{
             rotate: 0,
             stretch: 0,
             depth: 100,
             modifier: 2.5,
           }}
-          slidesPerView="auto"
+          slidesPerView='auto'
           initialSlide={2}
           autoplay
           loop

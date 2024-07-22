@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import PagesLayout from '@/components/layouts/PagesLayout'
-/*import 'bootstrap/dist/css/bootstrap.css'*/
 import './globalStyles/normalize.css'
 import './globalStyles/globals.css'
 import './globalStyles/header.css'

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 'use client'
 import { useUnit } from 'effector-react'
 import { motion } from 'framer-motion'
@@ -34,10 +35,13 @@ const CartPage = () => {
 
   return (
     <main>
-      <Breadcrumbs getDefaultTextGenerator={getDefaultTextGenerator} getTextGenerator={getTextGenerator} />
+      <Breadcrumbs
+        getDefaultTextGenerator={getDefaultTextGenerator}
+        getTextGenerator={getTextGenerator}
+      />
       {!shouldShowEmpty ? (
         <section className={styles.cart}>
-          <div className="container">
+          <div className='container'>
             <HeadingWithCount
               count={countWholeCartItemsAmount(currentCartByAuth)}
               title={translations[lang].breadcrumbs.cart}
@@ -45,8 +49,13 @@ const CartPage = () => {
             />
             <div className={styles.cart__inner}>
               <div className={styles.cart__left}>
-                {(isUserAuth() ? cartSpinner || loginCheckSpinner : cartSpinner) && (
-                  <motion.ul{...basePropsForMotion} className={cartSkeletonStyles.skeleton}>
+                {(isUserAuth()
+                  ? cartSpinner || loginCheckSpinner
+                  : cartSpinner) && (
+                  <motion.ul
+                    {...basePropsForMotion}
+                    className={cartSkeletonStyles.skeleton}
+                  >
                     {Array.from(new Array(3)).map((_, i) => (
                       <li key={i} className={cartSkeletonStyles.skeleton__item}>
                         <div
@@ -57,17 +66,24 @@ const CartPage = () => {
                   </motion.ul>
                 )}
                 {!cartSpinner && (
-                  <motion.ul{...basePropsForMotion} className={`list-reset ${styles.cart__list}`}>
+                  <motion.ul
+                    {...basePropsForMotion}
+                    className={`list-reset ${styles.cart__list}`}
+                  >
                     <CartList />
                   </motion.ul>
                 )}
               </div>
               <div className={styles.cart__right}>
                 {isMedia930 && (
-                  <PromotionalCode setIsCorrectPromotionalCode={setIsCorrectPromotionalCode} />
+                  <PromotionalCode
+                    setIsCorrectPromotionalCode={setIsCorrectPromotionalCode}
+                  />
                 )}
                 <div className={styles.cart__right__order}>
-                  <OrderInfoBlock isCorrectPromotionalCode={isCorrectPromotionalCode} />
+                  <OrderInfoBlock
+                    isCorrectPromotionalCode={isCorrectPromotionalCode}
+                  />
                 </div>
               </div>
             </div>
@@ -80,7 +96,7 @@ const CartPage = () => {
         </section>
       ) : (
         <section>
-          <div className="container">
+          <div className='container'>
             <EmptyPageContent
               subtitle={translations[lang].common.cart_empty}
               description={translations[lang].common.cart_empty_advice}

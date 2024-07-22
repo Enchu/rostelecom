@@ -5,7 +5,11 @@ import { showCountMessage } from '@/lib/utils/common'
 import { IHeadingWithCountProps } from '@/types/elements'
 import styles from '@/styles/heading-with-count/index.module.scss'
 
-const HeadingWithCount = ({ count, title, spinner }: IHeadingWithCountProps) => {
+const HeadingWithCount = ({
+  count,
+  title,
+  spinner,
+}: IHeadingWithCountProps) => {
   const { lang } = useLang()
 
   return (

@@ -10,14 +10,21 @@ import styles from '@/styles/product/index.module.scss'
 import skeletonStyles from '@/styles/skeleton/index.module.scss'
 
 const ProductsByCollection = ({ collection }: { collection: string }) => {
-  const { title, capitalizedCollection, spinner, products } = useProductsByCollection(collection)
-  const currentCategory = allowedCollectionsCategories[Math.floor(Math.random() * allowedCollectionsCategories.length)]
+  const { title, capitalizedCollection, spinner, products } =
+    useProductsByCollection(collection)
+  const currentCategory =
+    allowedCollectionsCategories[
+      Math.floor(Math.random() * allowedCollectionsCategories.length)
+    ]
 
   useEffect(() => {
     loadProductsByFilter({
       limit: 4,
       offset: 0,
-      category: allowedCollectionsCategories[Math.floor(Math.random() * allowedCollectionsCategories.length)],
+      category:
+        allowedCollectionsCategories[
+          Math.floor(Math.random() * allowedCollectionsCategories.length)
+        ],
       additionalParam: `collection=${collection}`,
     })
   }, [])
@@ -33,9 +40,14 @@ const ProductsByCollection = ({ collection }: { collection: string }) => {
       </span>
       <h2 className={styles.product__collection__title}>{title}</h2>
       <div className={styles.product__collection__inner}>
-        <AllLink link={`/collection-products?collection=${collection}&category=${currentCategory}`} />
+        <AllLink
+          link={`/collection-products?collection=${collection}&category=${currentCategory}`}
+        />
         {spinner && (
-          <motion.ul className={skeletonStyles.skeleton}{...basePropsForMotion}>
+          <motion.ul
+            className={skeletonStyles.skeleton}
+            {...basePropsForMotion}
+          >
             {Array.from(new Array(4)).map((_, i) => (
               <li key={i} className={skeletonStyles.skeleton__item}>
                 <div className={skeletonStyles.skeleton__item__light} />
@@ -44,7 +56,10 @@ const ProductsByCollection = ({ collection }: { collection: string }) => {
           </motion.ul>
         )}
         {!spinner && (
-          <motion.ul className={`list-reset ${styles.product__collection__list}`}{...basePropsForMotion}>
+          <motion.ul
+            className={`list-reset ${styles.product__collection__list}`}
+            {...basePropsForMotion}
+          >
             {(products.items || []).map((item) => (
               <ProductsListItem key={item._id} item={item} title={title} />
             ))}

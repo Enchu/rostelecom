@@ -11,7 +11,11 @@ import { IProducts } from '@/types/goods'
 import styles from '@/styles/watched-products/index.module.scss'
 import skeletonStyles from '@/styles/skeleton/index.module.scss'
 
-const WatchedProducts = ({ watchedProducts }: { watchedProducts: IProducts }) => {
+const WatchedProducts = ({
+  watchedProducts,
+}: {
+  watchedProducts: IProducts
+}) => {
   const spinner = useUnit(loadWatchedProductsFx.pending)
   const { lang, translations } = useLang()
   const isMedia430 = useMediaQuery(430)
@@ -33,10 +37,13 @@ const WatchedProducts = ({ watchedProducts }: { watchedProducts: IProducts }) =>
         {translations[lang].product.watched}
       </h2>
       <div className={styles.watched__inner}>
-        <AllLink link="/watched-products" />
+        <AllLink link='/watched-products' />
         <Slider {...settings} className={styles.watched__slider}>
           {spinner ? (
-            <motion.ul className={skeletonStyles.skeleton}{...basePropsForMotion}>
+            <motion.ul
+              className={skeletonStyles.skeleton}
+              {...basePropsForMotion}
+            >
               {Array.from(new Array(4)).map((_, i) => (
                 <li key={i} className={skeletonStyles.skeleton__item}>
                   <div className={skeletonStyles.skeleton__item__light} />
@@ -45,8 +52,11 @@ const WatchedProducts = ({ watchedProducts }: { watchedProducts: IProducts }) =>
             </motion.ul>
           ) : (
             (watchedProducts.items || []).map((item) => (
-              <div key={item._id} className={styles.watched__slide}
-                   style={{ width: isMedia370 ? 240 : isMedia430 ? 280 : 350 }}>
+              <div
+                key={item._id}
+                className={styles.watched__slide}
+                style={{ width: isMedia370 ? 240 : isMedia430 ? 280 : 350 }}
+              >
                 <ProductsListItem item={item} />
               </div>
             ))

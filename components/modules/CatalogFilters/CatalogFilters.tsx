@@ -7,7 +7,13 @@ import SizesSelect from './SizesSelect'
 import ColorsSelect from './ColorsSelect'
 import SortSelect from './SortSelect'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { setColors, setColorsOptions, setFiltersPopup, setSizes, setSizesOptions } from '@/context/catalog'
+import {
+  setColors,
+  setColorsOptions,
+  setFiltersPopup,
+  setSizes,
+  setSizesOptions,
+} from '@/context/catalog'
 import { basePropsForMotion } from '@/constants/motion'
 import SelectInfoItem from './SelectInfoItem'
 import FiltersPopup from './FiltersPopup/FiltersPopup'
@@ -16,18 +22,20 @@ import { $sizesOptions, $colorsOptions } from '@/context/catalog/state'
 import styles from '@/styles/catalog/index.module.scss'
 
 const CatalogFilters = ({
-                          handleApplyFiltersWithPrice,
-                          handleApplyFiltersWithSizes,
-                          handleApplyFiltersWithColors,
-                          handleApplyFiltersBySort,
-                        }: ICatalogFiltersProps) => {
+  handleApplyFiltersWithPrice,
+  handleApplyFiltersWithSizes,
+  handleApplyFiltersWithColors,
+  handleApplyFiltersBySort,
+}: ICatalogFiltersProps) => {
   const sizesOptions = useUnit($sizesOptions)
   const colorsOptions = useUnit($colorsOptions)
   const isMedia910 = useMediaQuery(910)
   const isMedia610 = useMediaQuery(610)
 
   const handleRemoveSizeOption = (id: number) => {
-    const updatedOptions = sizesOptions.map((item) => item.id === id ? { ...item, checked: false } : item)
+    const updatedOptions = sizesOptions.map((item) =>
+      item.id === id ? { ...item, checked: false } : item
+    )
 
     setSizesOptions(updatedOptions)
 
@@ -41,7 +49,7 @@ const CatalogFilters = ({
 
   const handleRemoveColorOption = (id: number) => {
     const updatedOptions = colorsOptions.map((item) =>
-      item.id === id ? { ...item, checked: false } : item,
+      item.id === id ? { ...item, checked: false } : item
     )
 
     setColorsOptions(updatedOptions)

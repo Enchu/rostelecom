@@ -30,7 +30,11 @@ import { openShareModal } from '@/context/modals'
 const ProductPageContent = () => {
   const product = useUnit($currentProduct)
   const { lang, translations } = useLang()
-  const { handleAddProductToFavorites, addToFavoritesSpinner, isProductInFavorites } = useFavoritesAction(product)
+  const {
+    handleAddProductToFavorites,
+    addToFavoritesSpinner,
+    isProductInFavorites,
+  } = useFavoritesAction(product)
   const {
     selectedSize,
     setSelectedSize,
@@ -59,7 +63,7 @@ const ProductPageContent = () => {
       JSON.stringify([
         ...watchedProducts,
         { category: product.category, _id: product._id },
-      ]),
+      ])
     )
   }, [product._id, product.category])
 
@@ -113,13 +117,22 @@ const ProductPageContent = () => {
                   callback={handleAddProductToFavorites}
                 />
               </div>
-              <button className={`btn-reset ${styles.product__top__price__share}`} onClick={handleProductShare} />
+              <button
+                className={`btn-reset ${styles.product__top__price__share}`}
+                onClick={handleProductShare}
+              />
             </div>
           </div>
           <div className={styles.product__top__available}>
-            <ProductAvailable vendorCode={product.vendorCode} inStock={+product.inStock} />
+            <ProductAvailable
+              vendorCode={product.vendorCode}
+              inStock={+product.inStock}
+            />
           </div>
-          <ProductColor color={product.characteristics.color} className={styles.product__top__color} />
+          <ProductColor
+            color={product.characteristics.color}
+            className={styles.product__top__color}
+          />
           {!!product.characteristics.collection && (
             <span className={styles.product__top__collection}>
               <span>{translations[lang].catalog.collection}:</span>{' '}
@@ -166,7 +179,10 @@ const ProductPageContent = () => {
                   updateCountAsync={false}
                 />
               ) : (
-                <div className={`counter ${styles.product__top__counter}`} style={{ justifyContent: 'center' }}>
+                <div
+                  className={`counter ${styles.product__top__counter}`}
+                  style={{ justifyContent: 'center' }}
+                >
                   <span>
                     {translations[lang].product.total_in_cart}{' '}
                     {allCurrentCartItemCount}
@@ -187,15 +203,24 @@ const ProductPageContent = () => {
             </div>
           </div>
           <div className={styles.product__top__description}>
-            <ProductInfoAccordion title={translations[lang].product.description}>
+            <ProductInfoAccordion
+              title={translations[lang].product.description}
+            >
               <p className={styles.product__top__description__text}>
                 {product.description}
               </p>
             </ProductInfoAccordion>
-            <ProductInfoAccordion title={translations[lang].product.characteristics}>
-              <ul className={`list-reset ${styles.product__top__description__characteristics}`}>
+            <ProductInfoAccordion
+              title={translations[lang].product.characteristics}
+            >
+              <ul
+                className={`list-reset ${styles.product__top__description__characteristics}`}
+              >
                 {Object.entries(product.characteristics).map(([key, value]) => (
-                  <li key={key} className={styles.product__top__description__text}>
+                  <li
+                    key={key}
+                    className={styles.product__top__description__text}
+                  >
                     {capitalizeFirstLetter(key)}: {value}
                   </li>
                 ))}
@@ -207,7 +232,9 @@ const ProductPageContent = () => {
       {!!product.characteristics.collection && (
         <ProductsByCollection collection={product.characteristics.collection} />
       )}
-      {!!watchedProducts.items?.length && (<WatchedProducts watchedProducts={watchedProducts} />)}
+      {!!watchedProducts.items?.length && (
+        <WatchedProducts watchedProducts={watchedProducts} />
+      )}
     </>
   )
 }

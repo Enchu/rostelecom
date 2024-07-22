@@ -28,12 +28,15 @@ const CartListItem = ({ item }: { item: ICartItem }) => {
         className={`btn-reset ${styles.cart__list__item__delete}`}
         onClick={handleDeleteCartItem}
       >
-        {deleteSpinner
-          ? (<FontAwesomeIcon icon={faSpinner} spin color="#fff" />)
-          : (<span />)
-        }
+        {deleteSpinner ? (
+          <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
+        ) : (
+          <span />
+        )}
       </button>
-      <div className={`${styles.cart__list__item__img} ${styles.cart__list__item__block}`}>
+      <div
+        className={`${styles.cart__list__item__img} ${styles.cart__list__item__block}`}
+      >
         <Image
           src={item.image}
           alt={item.name}
@@ -42,16 +45,24 @@ const CartListItem = ({ item }: { item: ICartItem }) => {
         />
       </div>
       <div className={styles.cart__list__item__wrapper}>
-        <div className={`${styles.cart__list__item__name} ${styles.cart__list__item__block}`}>
+        <div
+          className={`${styles.cart__list__item__name} ${styles.cart__list__item__block}`}
+        >
           {item.name}
         </div>
-        <div className={`${styles.cart__list__item__size} ${styles.cart__list__item__block}`}>
+        <div
+          className={`${styles.cart__list__item__size} ${styles.cart__list__item__block}`}
+        >
           Размер: {item.size.toUpperCase()}
         </div>
       </div>
       <div className={styles.cart__list__item__inner}>
-        <div className={`${styles.cart__list__item__initial} ${styles.cart__list__item__inner__block}`}>
-          <span className={`${styles.cart__list__item__price} ${styles.cart__list__item__initial__price}`}>
+        <div
+          className={`${styles.cart__list__item__initial} ${styles.cart__list__item__inner__block}`}
+        >
+          <span
+            className={`${styles.cart__list__item__price} ${styles.cart__list__item__initial__price}`}
+          >
             {formatPrice(+item.price)} ₽
           </span>
           <span className={styles.cart__list__item__initial__text}>
@@ -59,6 +70,7 @@ const CartListItem = ({ item }: { item: ICartItem }) => {
           </span>
         </div>
         <ProductCounter
+          // eslint-disable-next-line max-len
           className={`cart-list__item__counter ${styles.cart__list__item__counter} ${styles.cart__list__item__inner__block}`}
           count={count}
           setCount={setCount}
@@ -67,7 +79,9 @@ const CartListItem = ({ item }: { item: ICartItem }) => {
           cartItem={item}
           updateCountAsync
         />
-        <div className={`${styles.cart__list__item__price} ${styles.cart__list__item__inner__block}`}>
+        <div
+          className={`${styles.cart__list__item__price} ${styles.cart__list__item__inner__block}`}
+        >
           {formatPrice(animatedPrice)} ₽
         </div>
       </div>

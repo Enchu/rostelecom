@@ -6,7 +6,9 @@ const ProductLabel = ({ isNew, isBestseller }: IProductLabelProps) => {
   const { lang, translations } = useLang()
 
   const bestsellerLabel = (
-    <span className={`${styles.list__item__label} ${styles.list__item__bestseller}`}>
+    <span
+      className={`${styles.list__item__label} ${styles.list__item__bestseller}`}
+    >
       {translations[lang].main_page.is_bestseller}
     </span>
   )

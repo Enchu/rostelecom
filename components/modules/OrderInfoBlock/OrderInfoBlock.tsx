@@ -6,7 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLang } from '@/hooks/useLang'
 import { useTotalPrice } from '@/hooks/useTotalPrice'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
-import { formatPrice, handleOpenAuthPopup, isUserAuth, showCountMessage } from '@/lib/utils/common'
+import {
+  formatPrice,
+  handleOpenAuthPopup,
+  isUserAuth,
+  showCountMessage,
+} from '@/lib/utils/common'
 import { IOrderInfoBlockProps } from '@/types/modules'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { $cart, $cartFromLs } from '@/context/cart/state'
@@ -21,7 +26,10 @@ import { makePayment, makePaymentFx } from '@/context/order'
 import styles from '@/styles/order-block/index.module.scss'
 import toast from 'react-hot-toast'
 
-const OrderInfoBlock = ({ isCorrectPromotionalCode, isOrderPage }: IOrderInfoBlockProps) => {
+const OrderInfoBlock = ({
+  isCorrectPromotionalCode,
+  isOrderPage,
+}: IOrderInfoBlockProps) => {
   const { lang, translations } = useLang()
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
   const [isUserAgree, setIsUserAgree] = useState(false)
@@ -54,7 +62,10 @@ const OrderInfoBlock = ({ isCorrectPromotionalCode, isOrderPage }: IOrderInfoBlo
   }
 
   const handleMakePayment = async () => {
-    if (!chosenCourierAddressData.address_line1 && !chosenPickupAddressData.address_line1) {
+    if (
+      !chosenCourierAddressData.address_line1 &&
+      !chosenPickupAddressData.address_line1
+    ) {
       const orderBlock = document.querySelector('.order-block') as HTMLLIElement
       scrollToBlock(orderBlock)
       toast.error('Нужно выбрать адрес!')
@@ -62,7 +73,9 @@ const OrderInfoBlock = ({ isCorrectPromotionalCode, isOrderPage }: IOrderInfoBlo
     }
 
     if (!orderDetailsValues.isValid) {
-      const detailsBlock = document.querySelector('.details-block') as HTMLLIElement
+      const detailsBlock = document.querySelector(
+        '.details-block'
+      ) as HTMLLIElement
       scrollToBlock(detailsBlock)
       return
     }
@@ -76,10 +89,12 @@ const OrderInfoBlock = ({ isCorrectPromotionalCode, isOrderPage }: IOrderInfoBlo
     let description = ''
 
     if (chosenCourierAddressData.address_line1) {
+      // eslint-disable-next-line max-len
       description = `Адрес достаки товара курьером: ${chosenCourierAddressData.address_line1}, ${chosenCourierAddressData.address_line2}`
     }
 
     if (chosenPickupAddressData.address_line1) {
+      // eslint-disable-next-line max-len
       description = `Адрес получения товара: ${chosenPickupAddressData.address_line1}, ${chosenPickupAddressData.address_line2}`
     }
 
@@ -98,7 +113,10 @@ const OrderInfoBlock = ({ isCorrectPromotionalCode, isOrderPage }: IOrderInfoBlo
       <div className={styles.order_block__inner}>
         <p className={styles.order_block__info}>
           {countWholeCartItemsAmount(currentCartByAuth)}{' '}
-          {showCountMessage(`${countWholeCartItemsAmount(currentCartByAuth)}`, lang)}{' '}
+          {showCountMessage(
+            `${countWholeCartItemsAmount(currentCartByAuth)}`,
+            lang
+          )}{' '}
           {translations[lang].order.worth}{' '}
           <span className={styles.order_block__info__text}>
             {formatPrice(animatedPrice)} ₽
@@ -139,18 +157,23 @@ const OrderInfoBlock = ({ isCorrectPromotionalCode, isOrderPage }: IOrderInfoBlo
         {isOrderPage ? (
           <button
             className={`btn-reset ${styles.order_block__btn}`}
-            disabled={!isUserAgree || !currentCartByAuth.length || paymentSpinner}
+            disabled={
+              !isUserAgree || !currentCartByAuth.length || paymentSpinner
+            }
             onClick={handleMakePayment}
           >
-            {paymentSpinner
-              ? (<FontAwesomeIcon icon={faSpinner} spin color="#fff" />)
-              : (translations[lang].order.make_order)
-            }
+            {paymentSpinner ? (
+              <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
+            ) : (
+              translations[lang].order.make_order
+            )}
           </button>
         ) : (
           <Link
-            href="/order"
-            className={`${styles.order_block__btn} ${!isUserAgree || !currentCartByAuth.length ? styles.disabled : ''}`}
+            href='/order'
+            className={`${styles.order_block__btn} ${
+              !isUserAgree || !currentCartByAuth.length ? styles.disabled : ''
+            }`}
           >
             {translations[lang].order.make_order}
           </Link>
@@ -158,17 +181,24 @@ const OrderInfoBlock = ({ isCorrectPromotionalCode, isOrderPage }: IOrderInfoBlo
         <label className={styles.order_block__agreement}>
           <input
             className={styles.order_block__agreement__input}
-            type="checkbox"
+            type='checkbox'
             tabIndex={-1}
             ref={checkboxRef}
             onChange={handleAgreementChange}
             checked={isUserAgree}
           />
           <span className={styles.order_block__agreement__mark} />
-          <span className={styles.order_block__agreement__checkbox} tabIndex={0} onKeyDown={handleTabCheckbox} />
+          <span
+            className={styles.order_block__agreement__checkbox}
+            tabIndex={0}
+            onKeyDown={handleTabCheckbox}
+          />
           <span className={styles.order_block__agreement__text}>
             {translations[lang].order.agreement_text}{' '}
-            <Link href="/privacy" className={styles.order_block__agreement__link}>
+            <Link
+              href='/privacy'
+              className={styles.order_block__agreement__link}
+            >
               {translations[lang].order.agreement_link}
             </Link>
           </span>

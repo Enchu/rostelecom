@@ -26,26 +26,31 @@ const SizeTable = () => {
     addToCartSpinner,
     currentCartItems,
     updateCountSpinner,
-    product,
+    product
   } = useCartAction(true)
   const { addToFavoritesSpinner, setAddToFavoritesSpinner } = useFavoritesAction(product)
   const productSizes = useUnit($sizeTableSizes)
   const isHeaddressType = productSizes.type === 'headdress'
   const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
   const currentFavoriteItems = currentFavoritesByAuth.filter(
-    (item) => item.productId === product._id,
+    (item) => item.productId === product._id
   )
   const favoriteItemBySize = currentFavoriteItems.find(
-    (item) => item.size === selectedSize,
+    (item) => item.size === selectedSize
   )
 
   const handleSelectSSize = () => setSelectedSize('s')
+
   const handleSelectLSize = () => setSelectedSize('l')
+
   const handleSelectMSize = () => setSelectedSize('m')
+
   const handleSelectXLSize = () => setSelectedSize('xl')
+
   const handleSelectXXLSize = () => setSelectedSize('xxl')
 
   const isSizeSelected = (size: string) => selectedSize === size
+
   const checkInFavorites = (size: string) => currentFavoriteItems.find((item) => item.size === size)
 
   const headdressSizes = [
@@ -166,24 +171,24 @@ const SizeTable = () => {
   const trProps = (
     item:
       | {
-      id: number
-      russianSize: string
-      manufacturerSize: string
-      bust: string
-      waist: string
-      hipGirth: string
-      selectHandler: () => void
-      isSelected: boolean
-      isAvailable: boolean
-    }
+          id: number
+          russianSize: string
+          manufacturerSize: string
+          bust: string
+          waist: string
+          hipGirth: string
+          selectHandler: () => void
+          isSelected: boolean
+          isAvailable: boolean
+        }
       | {
-      id: number
-      headCircumference: string
-      manufacturerSize: string
-      selectHandler: () => void
-      isSelected: boolean
-      isAvailable: boolean
-    },
+          id: number
+          headCircumference: string
+          manufacturerSize: string
+          selectHandler: () => void
+          isSelected: boolean
+          isAvailable: boolean
+        }
   ) => ({
     onClick: item.selectHandler,
     style: {
@@ -223,79 +228,96 @@ const SizeTable = () => {
   }
 
   return (
-    <>
-      <div className={`${styles.size_table} ${isHeaddressType ? styles.size_table_headdress : ''}`}>
-        <button className={`btn-reset ${styles.size_table__close}`} onClick={handleCloseSizeTable} />
-        <h2 className={styles.size_table__title}>
-          {translations[lang].size_table.title}
-        </h2>
-        <div className={styles.size_table__inner}>
-          <table className={styles.size_table__table}>
-            <thead>
-            {isHeaddressType
-              ? (
-                <tr>
-                  <th>{translations[lang].size_table.head_circumference}</th>
-                  <th>{translations[lang].size_table.size}</th>
-                </tr>
-              )
-              : (
-                <tr>
-                  <th>{translations[lang].size_table.russian_size}</th>
-                  <th>{translations[lang].size_table.manufacturer_size}</th>
-                  <th>{translations[lang].size_table.chest_circumference}</th>
-                  <th>{translations[lang].size_table.waist_circumference}</th>
-                  <th>{translations[lang].size_table.hip_circumference}</th>
-                </tr>
-              )
-            }
-            </thead>
-            <tbody>
+    <div
+      className={`${styles.size_table} ${
+        isHeaddressType ? styles.size_table_headdress : ''
+      }`}
+    >
+      <button
+        className={`btn-reset ${styles.size_table__close}`}
+        onClick={handleCloseSizeTable}
+      />
+      <h2 className={styles.size_table__title}>
+        {translations[lang].size_table.title}
+      </h2>
+      <div className={styles.size_table__inner}>
+        <table className={styles.size_table__table}>
+          <thead>
+            {isHeaddressType ? (
+              <tr>
+                <th>{translations[lang].size_table.head_circumference}</th>
+                <th>{translations[lang].size_table.size}</th>
+              </tr>
+            ) : (
+              <tr>
+                <th>{translations[lang].size_table.russian_size}</th>
+                <th>{translations[lang].size_table.manufacturer_size}</th>
+                <th>{translations[lang].size_table.chest_circumference}</th>
+                <th>{translations[lang].size_table.waist_circumference}</th>
+                <th>{translations[lang].size_table.hip_circumference}</th>
+              </tr>
+            )}
+          </thead>
+          <tbody>
             {isHeaddressType
               ? headdressSizes.map((headdressSizesItem) => (
                 <tr
-                  key={headdressSizesItem.id}{...(trProps(headdressSizesItem) as React.HTMLAttributes<HTMLTableRowElement>)}>
+                  key={headdressSizesItem.id}
+                  {...(trProps(
+                    headdressSizesItem
+                  ) as React.HTMLAttributes<HTMLTableRowElement>)}
+                >
                   <td>
                     {headdressSizesItem.isInFavorites && (
                       <span className={styles.size_table__favorite} />
-                    )}
+                      )}
                     {headdressSizesItem.headCircumference}
                   </td>
                   <td>
-                    <ProductCountBySize size={headdressSizesItem.manufacturerSize} products={currentCartItems} />
+                    <ProductCountBySize
+                        size={headdressSizesItem.manufacturerSize}
+                        products={currentCartItems}
+                      />
                     {headdressSizesItem.manufacturerSize}
                   </td>
                 </tr>
               ))
               : dressSizes.map((item) => (
-                <tr key={item.id}{...(trProps(item) as React.HTMLAttributes<HTMLTableRowElement>)}>
+                <tr
+                    key={item.id}
+                    {...(trProps(
+                      item
+                    ) as React.HTMLAttributes<HTMLTableRowElement>)}
+                  >
                   <td>
                     {item.isInFavorites && (
                       <span className={styles.size_table__favorite} />
-                    )}
+                      )}
                     {item.russianSize}
                   </td>
                   <td>{item.manufacturerSize}</td>
                   <td>{item.bust}</td>
                   <td>{item.waist}</td>
                   <td>
-                    <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
+                    <ProductCountBySize
+                        size={item.manufacturerSize}
+                        products={currentCartItems}
+                      />
                     {item.hipGirth}
                   </td>
                 </tr>
               ))}
-            </tbody>
-          </table>
-        </div>
-        <AddToCartBtn
-          className={`${styles.size_table__btn} ${styles.size_table__btn_favorite}`}
-          handleAddToCart={isAddToFavorites ? handleAddProductToFavorites : addToCart}
-          addToCartSpinner={addToCartSpinner || updateCountSpinner || addToFavoritesSpinner}
-          btnDisabled={!!!selectedSize || addToCartSpinner || updateCountSpinner || addToFavoritesSpinner}
-          text={isAddToFavorites ? translations[lang].product.to_favorite : translations[lang].product.to_cart}
-        />
+          </tbody>
+        </table>
       </div>
-    </>
+      <AddToCartBtn
+        className={`${styles.size_table__btn} ${styles.size_table__btn_favorite}`}
+        handleAddToCart={isAddToFavorites ? handleAddProductToFavorites : addToCart}
+        addToCartSpinner={addToCartSpinner || updateCountSpinner || addToFavoritesSpinner}
+        btnDisabled={!!!selectedSize || addToCartSpinner || updateCountSpinner || addToFavoritesSpinner}
+        text={isAddToFavorites ? translations[lang].product.to_favorite : translations[lang].product.to_cart}
+      />
+    </div>
   )
 }
 

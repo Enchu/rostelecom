@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import Crumb from './Crumb'
 import { useLang } from '@/hooks/useLang'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -10,7 +11,10 @@ const generatePathParts = (pathStr: string) => {
   return pathWithoutQuery.split('/').filter((v) => v.length > 0)
 }
 
-const Breadcrumbs = ({ getTextGenerator, getDefaultTextGenerator }: IBreadcrumbsProps) => {
+const Breadcrumbs = ({
+  getTextGenerator,
+  getDefaultTextGenerator,
+}: IBreadcrumbsProps) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const { lang, translations } = useLang()
@@ -36,25 +40,31 @@ const Breadcrumbs = ({ getTextGenerator, getDefaultTextGenerator }: IBreadcrumbs
 
       return [...crumbList]
     },
-    [pathname, getTextGenerator, searchParams, getDefaultTextGenerator, lang],
+    [pathname, getTextGenerator, searchParams, getDefaultTextGenerator, lang]
   )
 
   return (
-    <div className="container breadcrumbs__container">
-      <ul className="list-reset breadcrumbs">
-        <li className="breadcrumbs__item">
-          <Link href="/" className="breadcrumbs__item__link first-crumb">
+    <div className='container breadcrumbs__container'>
+      <ul className='list-reset breadcrumbs'>
+        <li className='breadcrumbs__item'>
+          <Link href='/' className='breadcrumbs__item__link first-crumb'>
             {translations[lang].breadcrumbs.main}
           </Link>
         </li>
         {breadcrumbs.map((crumb, idx) =>
-          crumb.text
-            ? (
-              <li key={idx} className="breadcrumbs__item">
-                {/*@ts-ignore*/}
-                <Crumb {...crumb} key={idx} last={idx === breadcrumbs.length - 1} />
-              </li>)
-            : (''),
+          crumb.text ? (
+            <li key={idx} className='breadcrumbs__item'>
+              {/**eslint-disable-next-line @typescript-eslint/ban-ts-comment
+               * @ts-ignore */}
+              <Crumb
+                {...crumb}
+                key={idx}
+                last={idx === breadcrumbs.length - 1}
+              />
+            </li>
+          ) : (
+            ''
+          )
         )}
       </ul>
     </div>

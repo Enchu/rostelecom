@@ -7,16 +7,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 
 const ProductCounter = ({
-                          className,
-                          count,
-                          initialCount,
-                          totalCount,
-                          setCount,
-                          increasePrice,
-                          decreasePrice,
-                          cartItem,
-                          updateCountAsync,
-                        }: IProductCounterProps) => {
+  className,
+  count,
+  initialCount,
+  totalCount,
+  setCount,
+  increasePrice,
+  decreasePrice,
+  cartItem,
+  updateCountAsync,
+}: IProductCounterProps) => {
   const [spinner, setSpinner] = useState(false)
   const [disableIncrease, setDisableIncrease] = useState(false)
   const [disableDecrease, setDisableDecrease] = useState(false)
@@ -80,9 +80,17 @@ const ProductCounter = ({
 
   return (
     <div className={className}>
-      <button className="btn-reset" onClick={decrease} disabled={disableDecrease || spinner} />
+      <button
+        className='btn-reset'
+        onClick={decrease}
+        disabled={disableDecrease || spinner}
+      />
       <span>{spinner ? <FontAwesomeIcon icon={faSpinner} spin /> : count}</span>
-      <button className="btn-reset" onClick={increase} disabled={disableIncrease || spinner} />
+      <button
+        className='btn-reset'
+        onClick={increase}
+        disabled={disableIncrease || spinner}
+      />
     </div>
   )
 }

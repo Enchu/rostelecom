@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 'use client'
 import ReactPaginate from 'react-paginate'
 import { useEffect } from 'react'
@@ -149,7 +150,11 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
     <>
       <HeadingWithCount
         count={products.count}
-        title={(translations[lang].breadcrumbs as { [index: string]: string })[pageName]}
+        title={
+          (translations[lang].breadcrumbs as { [index: string]: string })[
+            pageName
+          ]
+        }
         spinner={productsSpinner}
       />
       <CatalogFilters
@@ -172,7 +177,10 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
         </motion.ul>
       )}
       {!productsSpinner && (
-        <motion.ul{...basePropsForMotion} className={`list-reset ${styles.catalog__list}`}>
+        <motion.ul
+          {...basePropsForMotion}
+          className={`list-reset ${styles.catalog__list}`}
+        >
           {(products.items || []).map((item) => (
             <ProductsListItem key={item._id} item={item} />
           ))}
@@ -193,7 +201,9 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
           onPageChange={handlePageChange}
         />
       </div>
-      {!!watchedProducts.items?.length && (<WatchedProducts watchedProducts={watchedProducts} />)}
+      {!!watchedProducts.items?.length && (
+        <WatchedProducts watchedProducts={watchedProducts} />
+      )}
     </>
   )
 }

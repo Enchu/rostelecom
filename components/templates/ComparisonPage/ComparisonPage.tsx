@@ -7,7 +7,10 @@ const ComparisonPage = () => {
   const { availableProductLinks } = useComparisonLinks()
 
   return (
-    <ComparisonLinksList links={availableProductLinks} className={styles.comparison_main_links} />
+    <ComparisonLinksList
+      links={availableProductLinks}
+      className={styles.comparison_main_links}
+    />
   )
 }
 

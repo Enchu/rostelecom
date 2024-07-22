@@ -5,7 +5,12 @@ import { loadProductsByFilterFx } from '@/context/goods'
 import { ISelectItemProps } from '@/types/catalog'
 import styles from '@/styles/catalog/index.module.scss'
 
-const SelectItem = ({ isActive, mobileClassName, item, setOption }: ISelectItemProps) => {
+const SelectItem = ({
+  isActive,
+  mobileClassName,
+  item,
+  setOption,
+}: ISelectItemProps) => {
   const spinner = useUnit(loadProductsByFilterFx.pending)
 
   const handleSelectOption = () => {
@@ -19,16 +24,15 @@ const SelectItem = ({ isActive, mobileClassName, item, setOption }: ISelectItemP
 
   return (
     <li
-      className={`
-      ${styles.catalog__filters__list__item}
-      ${spinner ? '' : isActive ? styles.option_active : ''}
-      ${mobileClassName || ''}`}
+      className={`${styles.catalog__filters__list__item} ${
+        spinner ? '' : isActive ? styles.option_active : ''
+      } ${mobileClassName || ''}`}
     >
       {spinner && isActive && (
         <span
           className={`${styles.catalog__filters__list__item__spinner} ${mobileClassName}`}
         >
-          <FontAwesomeIcon icon={faSpinner} spin color="#fff" />
+          <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
         </span>
       )}
       <button

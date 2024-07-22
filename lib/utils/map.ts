@@ -1,6 +1,4 @@
 /* eslint-disable indent */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
 import {
   getRostelecomOfficesByCityFx,
   setChosenPickupAddressData,

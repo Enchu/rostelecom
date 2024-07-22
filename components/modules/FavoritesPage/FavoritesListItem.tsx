@@ -7,11 +7,19 @@ import DeleteItemBtn from '@/components/elements/DeleteCartItemBtn/DeleteCartIte
 import AddToCartIcon from '@/components/elements/AddToCartIcon/AddToCartIcon'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { useLang } from '@/hooks/useLang'
-import { deleteProductFromLS, formatPrice, isUserAuth } from '@/lib/utils/common'
+import {
+  deleteProductFromLS,
+  formatPrice,
+  isUserAuth,
+} from '@/lib/utils/common'
 import styles from '@/styles/favorites/index.module.scss'
 import { addCartItemToLS } from '@/lib/utils/cart'
 import { IProduct } from '@/types/common'
-import { deleteProductFromFavorites, setFavoritesFromLS, setShouldShowEmptyFavorites } from '@/context/favorites'
+import {
+  deleteProductFromFavorites,
+  setFavoritesFromLS,
+  setShouldShowEmptyFavorites,
+} from '@/context/favorites'
 import { useProductDelete } from '@/hooks/useProductDelete'
 import { $cart, $cartFromLs } from '@/context/cart/state'
 
@@ -19,13 +27,15 @@ const FavoritesListItem = ({ item }: { item: IFavoriteItem }) => {
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
   const [addToCartSpinner, setAddToCartSpinner] = useState(false)
   const isProductInCart = currentCartByAuth.find(
-    (cartItem) => cartItem.productId === item.productId && cartItem.size === item.size)
+    (cartItem) =>
+      cartItem.productId === item.productId && cartItem.size === item.size
+  )
   const isMedia485 = useMediaQuery(485)
   const imgSize = isMedia485 ? 132 : 160
   const { lang, translations } = useLang()
   const { handleDelete, deleteSpinner } = useProductDelete(
     item._id || item.clientId,
-    deleteProductFromFavorites,
+    deleteProductFromFavorites
   )
 
   const addToCart = () => {
@@ -47,7 +57,7 @@ const FavoritesListItem = ({ item }: { item: IFavoriteItem }) => {
       cartItem as unknown as IProduct,
       item.size,
       1,
-      false,
+      false
     )
 
     addProductToCart({
@@ -68,7 +78,7 @@ const FavoritesListItem = ({ item }: { item: IFavoriteItem }) => {
         'favorites',
         setFavoritesFromLS,
         setShouldShowEmptyFavorites,
-        'Удалено из избранного!',
+        'Удалено из избранного!'
       )
       return
     }
@@ -80,7 +90,7 @@ const FavoritesListItem = ({ item }: { item: IFavoriteItem }) => {
       setFavoritesFromLS,
       setShouldShowEmptyFavorites,
       '',
-      false,
+      false
     )
   }
 

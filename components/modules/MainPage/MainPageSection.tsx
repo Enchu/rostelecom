@@ -14,7 +14,10 @@ const MainPageSection = ({ title, goods, spinner }: IMainPageSectionProps) => (
       <div className={styles.main_section__inner}>
         <AllLink />
         {spinner && (
-          <motion.ul className={skeletonStyles.skeleton}{...basePropsForMotion}>
+          <motion.ul
+            className={skeletonStyles.skeleton}
+            {...basePropsForMotion}
+          >
             {Array.from(new Array(4)).map((_, i) => (
               <li key={i} className={skeletonStyles.skeleton__item}>
                 <div className={skeletonStyles.skeleton__item__light} />
@@ -23,7 +26,10 @@ const MainPageSection = ({ title, goods, spinner }: IMainPageSectionProps) => (
           </motion.ul>
         )}
         {!spinner && (
-          <motion.ul className={`list-reset ${styles.main_section__list}`}{...basePropsForMotion}>
+          <motion.ul
+            className={`list-reset ${styles.main_section__list}`}
+            {...basePropsForMotion}
+          >
             {goods.map((item) => (
               <ProductsListItem key={item._id} item={item} title={title} />
             ))}

@@ -16,8 +16,11 @@ const HeaderProfile = forwardRef<HTMLDivElement, IWrappedComponentProps>(
     const { lang, translations } = useLang()
 
     return (
-      <div className="header-profile__popup" ref={ref}>
-        <button className="btn-reset header-profile__btn" onClick={handleTogglePopup}>
+      <div className='header-profile__popup' ref={ref}>
+        <button
+          className='btn-reset header-profile__btn'
+          onClick={handleTogglePopup}
+        >
           <Image
             src={src ? src : '/img/profile.svg'}
             alt={alt ? alt : 'profile'}
@@ -31,16 +34,22 @@ const HeaderProfile = forwardRef<HTMLDivElement, IWrappedComponentProps>(
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
-              className="list-reset header-profile__inner"
+              className='list-reset header-profile__inner'
             >
-              <li className="header-profile__arrow" />
-              <li className="header-profile__item">
-                <Link href="/profile" className="btn-reset header-profile__item__btn">
+              <li className='header-profile__arrow' />
+              <li className='header-profile__item'>
+                <Link
+                  href='/profile'
+                  className='btn-reset header-profile__item__btn'
+                >
                   {translations[lang].header.profile}
                 </Link>
               </li>
-              <li className="header-profile__item">
-                <button className="btn-reset header-profile__item__btn" onClick={handleLogout}>
+              <li className='header-profile__item'>
+                <button
+                  className='btn-reset header-profile__item__btn'
+                  onClick={handleLogout}
+                >
                   {translations[lang].header.logout}
                 </button>
               </li>
@@ -49,7 +58,7 @@ const HeaderProfile = forwardRef<HTMLDivElement, IWrappedComponentProps>(
         </AnimatePresence>
       </div>
     )
-  },
+  }
 )
 
 HeaderProfile.displayName = 'HeaderProfile'

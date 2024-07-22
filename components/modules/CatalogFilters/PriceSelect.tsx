@@ -7,7 +7,9 @@ import { basePropsForMotion } from '@/constants/motion'
 import styles from '@/styles/catalog/index.module.scss'
 import { getCheckedPriceFrom, getCheckedPriceTo } from '@/lib/utils/catalog'
 
-const PriceSelect = ({ handleApplyFiltersWithPrice }: {
+const PriceSelect = ({
+  handleApplyFiltersWithPrice,
+}: {
   handleApplyFiltersWithPrice: (arg0: string, arg1: string) => void
 }) => {
   const { lang, translations } = useLang()
@@ -31,7 +33,9 @@ const PriceSelect = ({ handleApplyFiltersWithPrice }: {
 
     setPriceFrom(validPriceFrom)
     setPriceTo(validPriceTo)
-    setPriceInfo(`${priceFromInfo(validPriceFrom)} ${priceToInfo(validPriceTo)}`)
+    setPriceInfo(
+      `${priceFromInfo(validPriceFrom)} ${priceToInfo(validPriceTo)}`
+    )
     setOpen(false)
     handleApplyFiltersWithPrice(validPriceFrom, validPriceTo)
   }
@@ -46,14 +50,19 @@ const PriceSelect = ({ handleApplyFiltersWithPrice }: {
       />
       <AnimatePresence>
         {open && (
-          <motion.ul className={`list-reset ${styles.catalog__filters__list}`}{...basePropsForMotion}>
-            <li className={`${styles.catalog__filters__list__item} ${styles.catalog__filters__list__item__price}`}>
+          <motion.ul
+            className={`list-reset ${styles.catalog__filters__list}`}
+            {...basePropsForMotion}
+          >
+            <li
+              className={`${styles.catalog__filters__list__item} ${styles.catalog__filters__list__item__price}`}
+            >
               <div className={styles.catalog__filters__list__item__inputs}>
                 <label>
                   <span>{translations[lang].catalog.from}</span>
                   <input
-                    type="text"
-                    placeholder="130 ₽"
+                    type='text'
+                    placeholder='130 ₽'
                     value={priceFrom}
                     onChange={handleChangePriceFrom}
                   />
@@ -61,8 +70,8 @@ const PriceSelect = ({ handleApplyFiltersWithPrice }: {
                 <label>
                   <span>{translations[lang].catalog.to}</span>
                   <input
-                    type="text"
-                    placeholder="6 500 ₽"
+                    type='text'
+                    placeholder='6 500 ₽'
                     value={priceTo}
                     onChange={handleChangePriceTo}
                   />

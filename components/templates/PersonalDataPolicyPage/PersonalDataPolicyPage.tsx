@@ -5,14 +5,17 @@ import styles from '@/styles/policy/index.module.scss'
 
 const PersonalDataPolicyPage = () => {
   const { getDefaultTextGenerator, getTextGenerator } = useBreadcrumbs(
-    'personal_data_policy',
+    'personal_data_policy'
   )
 
   return (
     <main>
-      <Breadcrumbs getDefaultTextGenerator={getDefaultTextGenerator} getTextGenerator={getTextGenerator} />
+      <Breadcrumbs
+        getDefaultTextGenerator={getDefaultTextGenerator}
+        getTextGenerator={getTextGenerator}
+      />
       <section className={styles.policy}>
-        <div className="container">
+        <div className='container'>
           <h1>Политика обработки персональных данных</h1>
           <p>
             <strong>1. ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ</strong>

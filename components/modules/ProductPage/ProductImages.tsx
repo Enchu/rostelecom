@@ -27,7 +27,10 @@ const ProductImages = () => {
         </ul>
       )}
       {isMedia520 && (
-        <Slider{...baseSliderSettings} className={styles.product__top__images__slider}>
+        <Slider
+          {...baseSliderSettings}
+          className={styles.product__top__images__slider}
+        >
           {images.map((img) => (
             <ProductImagesItem
               key={img.id}

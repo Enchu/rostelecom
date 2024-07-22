@@ -8,13 +8,13 @@ import styles from '@/styles/product-item-action-btn/index.module.scss'
 import tooltipStyles from '@/styles/tooltip/index.module.scss'
 
 const ProductItemActionBtn = ({
-                                text,
-                                callback,
-                                iconClass,
-                                marginBottom,
-                                spinner,
-                                withTooltip = true,
-                              }: IProductItemActionBtnProps) => {
+  text,
+  callback,
+  iconClass,
+  marginBottom,
+  spinner,
+  withTooltip = true,
+}: IProductItemActionBtnProps) => {
   const [open, setOpen] = useState(false)
   const [tooltipLeft, setTooltipLeft] = useState(0)
   const showTooltip = () => setOpen(true)
@@ -36,7 +36,7 @@ const ProductItemActionBtn = ({
         onMouseLeave={hideTooltip}
         style={{ marginBottom: marginBottom || 16 }}
       >
-        {spinner && <FontAwesomeIcon icon={faSpinner} spin color="#fff" />}
+        {spinner && <FontAwesomeIcon icon={faSpinner} spin color='#fff' />}
       </button>
       {withTooltip && (
         <AnimatePresence>

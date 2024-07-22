@@ -6,15 +6,17 @@ import SelectItem from './SelectItem'
 import { getSearchParamsUrl } from '@/lib/utils/common'
 
 const CategoryFilterList = ({
-                              mobileClassName,
-                              currentOptions,
-                              catalogCategoryOptions,
-                              allCategoriesTitle,
-                              option,
-                              handleSelectAllCategories,
-                              setOption,
-                            }: ICategoryFilterListProps) => (
-  <motion.ul className={`list-reset ${styles.catalog__filters__list} ${mobileClassName}`}>
+  mobileClassName,
+  currentOptions,
+  catalogCategoryOptions,
+  allCategoriesTitle,
+  option,
+  handleSelectAllCategories,
+  setOption,
+}: ICategoryFilterListProps) => (
+  <motion.ul
+    className={`list-reset ${styles.catalog__filters__list} ${mobileClassName}`}
+  >
     {currentOptions &&
       Object.keys(catalogCategoryOptions)[0] !== 'rootCategoryOptions' &&
       currentOptions.map((item) => (

@@ -1,14 +1,14 @@
 'use client'
 import Link from 'next/link'
-import {useLang} from '@/hooks/useLang'
+import { useLang } from '@/hooks/useLang'
 import styles from '@/styles/main-page/index.module.scss'
 
-const AllLink = ({link}: { link?: string }) => {
-  const {lang, translations} = useLang()
+const AllLink = ({ link }: { link?: string }) => {
+  const { lang, translations } = useLang()
 
   return (
     <Link href={link || `/catalog`} className={styles.all}>
-      <span/>
+      <span />
       {translations[lang].common.all_link}
     </Link>
   )

@@ -7,13 +7,15 @@ import { basePropsForMotion } from '@/constants/motion'
 import CheckboxSelectItem from './CheckboxSelectItem'
 import styles from '@/styles/catalog/index.module.scss'
 
-const ColorsSelect = ({ handleApplyFiltersWithColors }: {
+const ColorsSelect = ({
+  handleApplyFiltersWithColors,
+}: {
   handleApplyFiltersWithColors: (sizes: string[]) => void
 }) => {
   const { lang, translations } = useLang()
   const { open, ref, toggle } = useClickOutside()
   const { handleSelectColor, colors, colorsOptions } = useColorsFilter(
-    handleApplyFiltersWithColors,
+    handleApplyFiltersWithColors
   )
 
   return (
@@ -26,7 +28,10 @@ const ColorsSelect = ({ handleApplyFiltersWithColors }: {
       />
       <AnimatePresence>
         {open && (
-          <motion.ul className={`list-reset ${styles.catalog__filters__list}`}{...basePropsForMotion}>
+          <motion.ul
+            className={`list-reset ${styles.catalog__filters__list}`}
+            {...basePropsForMotion}
+          >
             {colorsOptions.map((item) => (
               <CheckboxSelectItem
                 key={item.id}

@@ -7,13 +7,17 @@ const ProductImagesItem = ({ image, imgSize }: IProductImagesItemProps) => {
   const { handleLoadingImageComplete, imgSpinner } = useImagePreloader()
 
   return (
-    <li className={`${styles.product__top__images__item} ${imgSpinner ? styles.img_loading : ''}`}>
+    <li
+      className={`${styles.product__top__images__item} ${
+        imgSpinner ? styles.img_loading : ''
+      }`}
+    >
       <Image
         src={image.src}
         alt={image.alt}
         width={imgSize}
         height={imgSize}
-        className="transition-opacity opacity-0 duration"
+        className='transition-opacity opacity-0 duration'
         onLoad={handleLoadingImageComplete}
       />
     </li>

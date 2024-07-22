@@ -9,7 +9,10 @@ const SelectInfoItem = ({ text, handleRemoveItem, id }: ISelectInfoItem) => {
       <span className={styles.catalog__filters__bottom__list__item__text}>
         {text}
       </span>
-      <button className={`btn-reset ${styles.catalog__filters__bottom__list__item__close}`} onClick={handleClick} />
+      <button
+        className={`btn-reset ${styles.catalog__filters__bottom__list__item__close}`}
+        onClick={handleClick}
+      />
     </li>
   )
 }

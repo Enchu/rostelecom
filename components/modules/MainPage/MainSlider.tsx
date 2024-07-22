@@ -1,22 +1,23 @@
 'use client'
-import Slider from "react-slick";
+import Slider from 'react-slick'
 import Link from 'next/link'
-import {useEffect} from 'react'
-import Image, {StaticImageData} from 'next/image'
+import { useEffect } from 'react'
+import Image, { StaticImageData } from 'next/image'
 import useImagePreloader from '@/hooks/useImagePreloader'
-import {useMediaQuery} from '@/hooks/useMediaQuery'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import styles from '@/styles/main-page/index.module.scss'
 
-const MainSlider = ({images,}: {
+const MainSlider = ({
+  images,
+}: {
   images: {
     src: StaticImageData
     id: number
     title: string
   }[]
 }) => {
-
   const isMedia420 = useMediaQuery(420)
-  const {handleLoadingImageComplete, imgSpinner} = useImagePreloader()
+  const { handleLoadingImageComplete, imgSpinner } = useImagePreloader()
   const imgSpinnerClass = imgSpinner ? styles.img_loading : ''
   const settings = {
     dots: false,
@@ -40,27 +41,25 @@ const MainSlider = ({images,}: {
   }, [isMedia420])
 
   return (
-    <>
-      <Slider {...settings} className={styles.categories__slider}>
-        {images.map((item) => (
-          <Link
-            key={item.id}
-            style={{width: isMedia420 ? 290 : 357}}
-            className={`${styles.categories__slide} ${styles.categories__img} ${imgSpinnerClass}`}
-            href='/catalog'
-          >
-            <Image
-              src={item.src}
-              alt={item.title}
-              width={357}
-              height={357}
-              onLoad={handleLoadingImageComplete}
-            />
-            <span>{item.title.replace(/\s/g, '\u00A0')}</span>
-          </Link>
-        ))}
-      </Slider>
-    </>
+    <Slider {...settings} className={styles.categories__slider}>
+      {images.map((item) => (
+        <Link
+          key={item.id}
+          style={{ width: isMedia420 ? 290 : 357 }}
+          className={`${styles.categories__slide} ${styles.categories__img} ${imgSpinnerClass}`}
+          href='/catalog'
+        >
+          <Image
+            src={item.src}
+            alt={item.title}
+            width={357}
+            height={357}
+            onLoad={handleLoadingImageComplete}
+          />
+          <span>{item.title.replace(/\s/g, '\u00A0')}</span>
+        </Link>
+      ))}
+    </Slider>
   )
 }
 

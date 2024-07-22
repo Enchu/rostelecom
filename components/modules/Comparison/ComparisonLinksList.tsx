@@ -4,7 +4,10 @@ import { IComparisonLinksListProps } from '@/types/comparison'
 import { basePropsForMotion } from '@/constants/motion'
 import styles from '@/styles/comparison/index.module.scss'
 
-const ComparisonLinksList = ({ links, className }: IComparisonLinksListProps) => (
+const ComparisonLinksList = ({
+  links,
+  className,
+}: IComparisonLinksListProps) => (
   <motion.ul className={`list-reset ${className}`} {...basePropsForMotion}>
     {links.map((item) => (
       <li key={item.title} className={`${item.isActive ? styles.active : ''}`}>

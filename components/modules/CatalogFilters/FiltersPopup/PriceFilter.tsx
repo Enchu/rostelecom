@@ -4,7 +4,9 @@ import { usePriceFilter } from '@/hooks/usePriceFilter'
 import { getCheckedPriceFrom, getCheckedPriceTo } from '@/lib/utils/catalog'
 import styles from '@/styles/catalog/index.module.scss'
 
-const PriceFilter = ({ handleApplyFiltersWithPrice }: {
+const PriceFilter = ({
+  handleApplyFiltersWithPrice,
+}: {
   handleApplyFiltersWithPrice: (arg0: string, arg1: string) => void
 }) => {
   const {
@@ -25,11 +27,15 @@ const PriceFilter = ({ handleApplyFiltersWithPrice }: {
       return
     }
 
-    const validPriceFrom = getCheckedPriceFrom(+e.target.value.replace(/[^0-9]+/g, '')) as string
+    const validPriceFrom = getCheckedPriceFrom(
+      +e.target.value.replace(/[^0-9]+/g, '')
+    ) as string
     const validPriceTo = getCheckedPriceTo(+priceTo) as string
 
     setPriceFrom(validPriceFrom)
-    delayCallback(() => handleApplyFiltersWithPrice(validPriceFrom, validPriceTo))
+    delayCallback(() =>
+      handleApplyFiltersWithPrice(validPriceFrom, validPriceTo)
+    )
   }
 
   const onPriceToChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,12 +46,12 @@ const PriceFilter = ({ handleApplyFiltersWithPrice }: {
 
     const validPriceFrom = getCheckedPriceFrom(+priceFrom) as string
     const validPriceTo = getCheckedPriceTo(
-      +e.target.value.replace(/[^0-9]+/g, ''),
+      +e.target.value.replace(/[^0-9]+/g, '')
     ) as string
 
     setPriceTo(validPriceTo)
     delayCallback(() =>
-      handleApplyFiltersWithPrice(validPriceFrom, validPriceTo),
+      handleApplyFiltersWithPrice(validPriceFrom, validPriceTo)
     )
   }
 
@@ -54,12 +60,16 @@ const PriceFilter = ({ handleApplyFiltersWithPrice }: {
       <h3 className={styles.catalog__filters__popup__inner_title}>
         {translations[lang].catalog.price}
       </h3>
-      <div className={`${styles.catalog__filters__list__item__inputs} ${styles.catalog__filters__popup__price__inputs}`}>
+      <div
+        className={`
+          ${styles.catalog__filters__list__item__inputs} ${styles.catalog__filters__popup__price__inputs}
+        `}
+      >
         <label>
           <span>{translations[lang].catalog.from}</span>
           <input
-            type="text"
-            placeholder="130 ₽"
+            type='text'
+            placeholder='130 ₽'
             value={priceFrom}
             onChange={onPriceFromChange}
           />
@@ -67,8 +77,8 @@ const PriceFilter = ({ handleApplyFiltersWithPrice }: {
         <label>
           <span>{translations[lang].catalog.to}</span>
           <input
-            type="text"
-            placeholder="6 500 ₽"
+            type='text'
+            placeholder='6 500 ₽'
             value={priceTo}
             onChange={onPriceToChange}
           />

@@ -1,9 +1,17 @@
 import { ISelectBtnProps } from '@/types/catalog'
 import styles from '@/styles/catalog/index.module.scss'
 
-const SelectBtn = ({ open, toggle, dynamicText, defaultText, bgClassName }: ISelectBtnProps) => (
+const SelectBtn = ({
+  open,
+  toggle,
+  dynamicText,
+  defaultText,
+  bgClassName,
+}: ISelectBtnProps) => (
   <button
-    className={`btn-reset ${styles.catalog__filters__btn} ${open ? styles.is_open : ''} ${bgClassName || ''}`}
+    className={`btn-reset ${styles.catalog__filters__btn} ${
+      open ? styles.is_open : ''
+    } ${bgClassName || ''}`}
     onClick={toggle}
   >
     {dynamicText ? (

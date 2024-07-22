@@ -7,7 +7,10 @@ import { useProductsByCollection } from '@/hooks/useProductsByCollection'
 import ProductsListItem from '@/components/modules/ProductsListItem/ProductsListItem'
 import { basePropsForMotion } from '@/constants/motion'
 import { getSearchParamsUrl } from '@/lib/utils/common'
-import { allowedCollections, allowedCollectionsCategories } from '@/constants/product'
+import {
+  allowedCollections,
+  allowedCollectionsCategories,
+} from '@/constants/product'
 import skeletonStyles from '@/styles/skeleton/index.module.scss'
 import styles from '@/styles/watched-products-page/index.module.scss'
 import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
@@ -15,8 +18,11 @@ import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
 
 const CollectionProductsPage = () => {
   const [currentCollection, setCurrentCollection] = useState('')
-  const { title, spinner, products } = useProductsByCollection(currentCollection)
-  const { getDefaultTextGenerator, getTextGenerator } = useBreadcrumbs('collection_products')
+  const { title, spinner, products } =
+    useProductsByCollection(currentCollection)
+  const { getDefaultTextGenerator, getTextGenerator } = useBreadcrumbs(
+    'collection_products'
+  )
 
   useEffect(() => {
     const urlParams = getSearchParamsUrl()
@@ -46,9 +52,12 @@ const CollectionProductsPage = () => {
 
   return (
     <main>
-      <Breadcrumbs getDefaultTextGenerator={getDefaultTextGenerator} getTextGenerator={getTextGenerator} />
+      <Breadcrumbs
+        getDefaultTextGenerator={getDefaultTextGenerator}
+        getTextGenerator={getTextGenerator}
+      />
       <section className={styles.watched_products}>
-        <div className="container">
+        <div className='container'>
           <h1 className={`site-title ${styles.watched_products__title}`}>
             {title}
           </h1>

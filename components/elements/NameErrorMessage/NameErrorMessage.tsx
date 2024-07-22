@@ -1,7 +1,11 @@
 import { useLang } from '@/hooks/useLang'
 import { INameErrorMessageProps } from '@/types/authPopup'
 
-const NameErrorMessage = ({ errors, className, fieldName }: INameErrorMessageProps) => {
+const NameErrorMessage = ({
+  errors,
+  className,
+  fieldName,
+}: INameErrorMessageProps) => {
   const { lang, translations } = useLang()
 
   return (
