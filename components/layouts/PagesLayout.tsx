@@ -107,9 +107,7 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
                 onClick={handleCloseSizeTable}
               />
               <div
-                className={`auth-overlay ${
-                  openAuthPopup ? 'overlay-active' : ''
-                }`}
+                className={`auth-overlay ${openAuthPopup ? 'overlay-active' : ''}`}
                 onClick={handleCloseAuthPopup}
               />
               <div

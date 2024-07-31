@@ -162,6 +162,7 @@ const Header = () => {
               onClick={handleOpenSearchModal}
             />
           </li>
+
           <li className='header__links__item'>
             <Link
               href='/favorites'
@@ -172,29 +173,24 @@ const Header = () => {
               )}
             </Link>
           </li>
+
           <li className='header__links__item'>
-            <Link
-              className='header__links__item__btn header__links__item__btn--compare'
-              href='/comparison'
-            >
+            <Link className='header__links__item__btn header__links__item__btn--compare' href='/comparison'>
               {!!currentComparisonByAuth.length && (
                 <span className='not-empty' />
               )}
             </Link>
           </li>
+
           <li className='header__links__item'>
             <CartPopup />
           </li>
+
           <li className='header__links__item header__links__item--profile'>
-            {isAuth ? (
-              <HeaderProfile />
-            ) : loginCheckSpinner ? (
-              <FontAwesomeIcon icon={faSpinner} spin />
-            ) : (
-              <button
-                className='btn-reset header__links__item__btn header__links__item__btn--profile'
-                onClick={handleOpenAuthPopup}
-              />
+            {isAuth
+              ? (<HeaderProfile />) : loginCheckSpinner
+                ? (<FontAwesomeIcon icon={faSpinner} spin />)
+                : (<button className='btn-reset header__links__item__btn header__links__item__btn--profile' onClick={handleOpenAuthPopup} />
             )}
           </li>
         </ul>

@@ -10,13 +10,14 @@ import PasswordInput from './PasswordInput'
 import { useLang } from '@/hooks/useLang'
 import AuthPopupSocials from './AuthPopupSocials'
 
-const AuthPopupRegistration = ({
-  toggleAuth,
-  isSideActive,
-}: IAuthSideProps) => {
+const AuthPopupRegistration = ({ toggleAuth, isSideActive, }: IAuthSideProps) => {
   const { lang, translations } = useLang()
-  const { spinner, register, errors, handleSubmit, handleSignupWithOAuth } =
-    useAuthForm(singUpFx.pending, isSideActive, handleSignUp)
+  const {
+    spinner,
+    register,
+    errors,
+    handleSubmit,
+    handleSignupWithOAuth } = useAuthForm(singUpFx.pending, isSideActive, handleSignUp)
 
   const submitForm = (data: IInputs) =>
     handleSignUp({
@@ -43,22 +44,17 @@ const AuthPopupRegistration = ({
           <div className='card-body__inner'>
             <div className='inner__top'>
               <button className='inner__btn' type='submit' disabled={spinner}>
-                {spinner ? (
-                  <FontAwesomeIcon icon={faSpinner} spin />
-                ) : (
-                  translations[lang].auth_popup.registration_text
-                )}
+                {spinner
+                  ? (<FontAwesomeIcon icon={faSpinner} spin />)
+                  : (translations[lang].auth_popup.registration_text)
+                }
               </button>
             </div>
             <div className='inner__bottom'>
               <span className='inner__bottom__text'>
                 {translations[lang].auth_popup.registration_question}
               </span>
-              <button
-                type='button'
-                className='btn-reset inner__switch'
-                onClick={toggleAuth}
-              >
+              <button type='button' className='btn-reset inner__switch' onClick={toggleAuth}>
                 {translations[lang].auth_popup.login_text}!
               </button>
             </div>

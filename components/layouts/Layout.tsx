@@ -95,9 +95,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </AnimatePresence>
       )}
       <div
-        className={`header__search-overlay ${
-          searchModal ? 'overlay-active' : ''
-        }`}
+        className={`header__search-overlay ${searchModal ? 'overlay-active' : ''}`}
         onClick={handleCloseSearchModal}
       />
       <Footer />

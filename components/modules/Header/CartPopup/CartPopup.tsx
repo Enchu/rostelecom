@@ -14,8 +14,7 @@ import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { getCartItemsFx } from '@/context/cart'
 import { $cart, $cartFromLs } from '@/context/cart/state'
 
-const CartPopup = forwardRef<HTMLDivElement, IWrappedComponentProps>(
-  ({ open, setOpen }, ref) => {
+const CartPopup = forwardRef<HTMLDivElement, IWrappedComponentProps>(({ open, setOpen }, ref) => {
     const { lang, translations } = useLang()
     const handleShowPopup = () => setOpen(true)
     const spinner = useUnit(getCartItemsFx.pending)
