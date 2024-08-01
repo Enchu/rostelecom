@@ -1,32 +1,32 @@
-'use client'
-import { useLang } from '@/hooks/useLang'
-import { useState } from 'react'
-import styles from '@/styles/password-restore/index.module.scss'
-import { useUnit } from 'effector-react'
-import { verifyCodeFx, verifyEmailFx } from '@/context/passwordRestore'
-import { useForm } from 'react-hook-form'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { emailValidationRules } from '@/lib/utils/auth'
-import CodeInputBlock from '@/components/modules/ProfilePage/CodeInputBlock/CodeInputBlock'
-import PasswordRestoreForm from '@/components/modules/PasswordRestorePage/PasswordRestoreForm'
+"use client"
+import { useLang } from "@/hooks/useLang"
+import { useState } from "react"
+import styles from "@/styles/password-restore/index.module.scss"
+import { useUnit } from "effector-react"
+import { verifyCodeFx, verifyEmailFx } from "@/context/passwordRestore"
+import { useForm } from "react-hook-form"
+import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { emailValidationRules } from "@/lib/utils/auth"
+import CodeInputBlock from "@/components/modules/ProfilePage/CodeInputBlock/CodeInputBlock"
+import PasswordRestoreForm from "@/components/modules/PasswordRestorePage/PasswordRestoreForm"
 
 const PasswordRestorePage = () => {
   const { lang, translations } = useLang()
   const [viewId, setViewId] = useState(1)
-  const [codeId, setCodeId] = useState('')
+  const [codeId, setCodeId] = useState("")
   const verifyEmailSpinner = useUnit(verifyEmailFx.pending)
   const verifyCodeSpinner = useUnit(verifyCodeFx.pending)
   const {
     register,
     getValues,
     formState: { errors },
-    handleSubmit,
+    handleSubmit
   } = useForm<{ email: string }>()
 
   const handleVerifyEmail = async (data: { email: string }) => {
     const result = await verifyEmailFx({
-      email: data.email,
+      email: data.email
     })
 
     if (!result) {
@@ -48,13 +48,13 @@ const PasswordRestorePage = () => {
   return (
     <main>
       <section className={styles.password_restore}>
-        <div className='container'>
+        <div className="container">
           <h1 className={`site-title ${styles.password_restore__title}`}>
             {translations[lang].password_restore_page.password_restore}
           </h1>
           {(verifyEmailSpinner || verifyCodeSpinner) && (
             <div className={styles.password_restore__spinner}>
-              <FontAwesomeIcon icon={faSpinner} spin color='#fff' size='3x' />
+              <FontAwesomeIcon icon={faSpinner} spin color="#fff" size="3x" />
             </div>
           )}
           {viewId === 1 && !verifyEmailSpinner && (
@@ -72,11 +72,11 @@ const PasswordRestorePage = () => {
                   </span>
                 )}
                 <input
-                  type='email'
+                  type="email"
                   className={styles.password_restore_form__input}
-                  placeholder='Email'
+                  placeholder="Email"
                   {...register(
-                    'email',
+                    "email",
                     emailValidationRules(
                       translations[lang].validation.invalid_email,
                       translations[lang].validation.required_email
@@ -94,14 +94,14 @@ const PasswordRestorePage = () => {
           {viewId === 2 && !verifyCodeSpinner && (
             <>
               <h2 className={styles.password_restore_form__title}>
-                {translations[lang].password_restore_page.we_sent_code}{' '}
-                <span>{getValues('email')}</span>
+                {translations[lang].password_restore_page.we_sent_code}{" "}
+                <span>{getValues("email")}</span>
               </h2>
               <CodeInputBlock onComplete={handleCompleteEmailVerification} />
             </>
           )}
           {viewId === 3 && (
-            <PasswordRestoreForm userEmail={getValues('email')} />
+            <PasswordRestoreForm userEmail={getValues("email")} />
           )}
         </div>
       </section>
