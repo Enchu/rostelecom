@@ -22,8 +22,8 @@ export async function POST(req: Request) {
         'Idempotence-Key': Date.now(),
       },
       auth: {
-        username: '284434',
-        password: 'test_qDOAK1qBsglEy7Pbf2ZkSq7-uWERPH-LNAwPyPNS8hc',
+        username: '412385',
+        password: 'test_y3VUQ4cMUIYzTyaP095ISFbM8t5ucelNbZx_uwt02M0',
       },
       data: {
         amount: {
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
         },
         confirmation: {
           type: 'redirect',
-          return_url: 'https://rostelecom-shop.vercel.app/payment-success',
+          return_url: 'https://rostelecom-six.vercel.app/payment-success',
         },
         capture: true,
         description: reqBody.description,
