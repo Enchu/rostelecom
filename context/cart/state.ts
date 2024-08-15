@@ -18,7 +18,6 @@ export const $cart = cart
   .createStore<ICartItem[]>([])
   .on(getCartItemsFx.done, (_, { result }) => result)
   .on(addProductsFromLSToCartFx.done, (_, { result }) => result.items)
-
   .on(addProductToCartFx.done, (cart, { result }) => [
     // @ts-ignore
     ...new Map([...cart, result.newCartItem].map((item) => [item.clientId, item])).values(),

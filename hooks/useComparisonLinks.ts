@@ -12,12 +12,12 @@ export const useComparisonLinks = () => {
   const { lang, translations } = useLang()
   const pathname = usePathname()
 
-
   const availableProductLinks = useMemo(
     () =>
       [
-        // @ts-ignore
-        ...new Set(currentComparisonByAuth.map((item) => item.characteristics.type)),
+        ...new Set(
+          currentComparisonByAuth.map((item) => item.characteristics.type)
+        ),
       ].map((type) => ({
         title: (translations[lang].comparison as { [index: string]: string })[
           type

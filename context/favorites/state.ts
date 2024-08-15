@@ -17,9 +17,7 @@ export const $favorites = favorites
   .on(getFavoriteItemsFx.done, (_, { result }) => result)
   .on(addProductToFavoriteFx.done, (cart, { result }) => [
     // @ts-ignore
-    ...new Map(
-      [...cart, result.newFavoriteItem].map((item) => [item.clientId, item])
-    ).values(),
+    ...new Map([...cart, result.newFavoriteItem].map((item) => [item.clientId, item])).values(),
   ])
   .on(addProductsFromLSToFavoritesFx.done, (_, { result }) => result.items)
   .on(deleteFavoriteItemFx.done, (state, { result }) =>

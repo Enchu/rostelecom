@@ -1,4 +1,5 @@
 'use client'
+
 import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
 import ProfileAvatar from '@/components/modules/ProfilePage/ProfileAvatar'
 import { $user } from '@/context/user/state'

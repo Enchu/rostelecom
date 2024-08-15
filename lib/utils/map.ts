@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import {
   getRostelecomOfficesByCityFx,
   setChosenPickupAddressData,
@@ -155,7 +154,6 @@ export function initSearchMarker(ttMaps) {
 
   SearchMarker.prototype.createMarker = function () {
     const elem = document.createElement('div')
-    // elem.className = 'tt-icon-marker-black tt-search-marker'
     if (this.options.markerClassName) {
       elem.className += ' ' + this.options.markerClassName
     }

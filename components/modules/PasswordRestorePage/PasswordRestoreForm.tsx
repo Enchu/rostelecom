@@ -66,7 +66,7 @@ const PasswordRestoreForm = ({ userEmail }: { userEmail: string }) => {
         )}
         <input
           type='password'
-          placeholder={translations[lang].password_restore_page.repeat_password}
+          placeholder={translations[lang].password_restore_page.create_password}
           className={styles.password_restore_form__input}
           {...register('passwordRepeat', passwordRegisterSettings)}
         />

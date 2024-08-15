@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker')
 const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
 const collections = ['street', 'black', 'casual', 'orange', 'line']
-const colors = ['purpure', 'yellow', 'orange', 'black', 'white']
+const colors = ['purple', 'yellow', 'orange', 'black', 'white']
 const compositions = ['cotton', 'synthetics', 'polyester']
 const clothTypes = ['t-shirts', 'long-sleeves', 'hoodie', 'outerwear']
 const images = [
@@ -53,7 +53,7 @@ const liningMaterials = ['taffeta', 'viscose', 'polyester', 'chiffon', 'satin']
 
 module.exports = {
   async up(db) {
-    return db.collection('long-sleeves').insertMany(
+    return db.collection('cloth').insertMany(
       [...Array(50)].map(() => {
         const type = clothTypes[Math.floor(Math.random() * clothTypes.length)]
         const characteristics = [
@@ -116,7 +116,7 @@ module.exports = {
         )
 
         return {
-          category: 'long-sleeves',
+          category: 'cloth',
           type,
           price: +faker.string.numeric(4).replace(/.{0,2}$/, 99),
           name: faker.lorem.sentence(2),
@@ -144,6 +144,6 @@ module.exports = {
   },
 
   async down(db) {
-    return db.collection('long-sleeves').updateMany([])
+    return db.collection('cloth').updateMany([])
   }
 };
